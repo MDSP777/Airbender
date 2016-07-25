@@ -1,0 +1,147 @@
+/*Header*/
+div.navbar div.container ul#rightnav 
+  {
+    list-style: none;
+    text-align: right;
+    padding: 10px 30px 0 0;
+    margin: 0;
+    float: right; 
+  }
+    div.navbar div.container ul#rightnav li 
+    {
+      display: inline-block;
+      padding: 14px 12px; 
+    }
+      div.navbar div.container ul#rightnav li a, div#topbar ul#rightnav li button 
+      {
+        color: #FFF;
+        text-decoration: none;
+        font-size: 120%;
+      }     
+         
+div#navbar 
+{
+  background-color: green;
+  z-index: 5;
+}
+
+div#navbar div#container div#navbar-header a, div#navbar div#container div#navbar-ex-collapse ul#leftnav li a
+{
+    color: #FFF;
+    text-decoration: none;
+    font-size: 120%;
+}
+
+div#navbar div#container div#icons ul#icons-nav
+{
+    list-style: none;
+    text-align: left;
+    padding: 10px 0 0 30px;
+    margin: 0;
+    float: left; 
+}
+    div#navbar div#container div#icons ul#icons-nav li
+    {
+      display: inline-block;
+      padding: 0 10px 0 10px; 
+    }
+ 
+/*Login*/        
+div#login
+{
+  position: absolute;
+  top: 0;
+  bottom: 20%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  display: none;
+  width: 350px;
+  height: 300px;
+  z-index: 1;
+}
+
+div#login h1
+{
+	color: green;
+}
+
+div#signup
+{
+  position: absolute;
+  top: 0;
+  bottom: 20%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  display: none;
+  width: 350px;
+  height: 300px;
+  z-index: 1;
+}
+div.loginBox 
+{
+  width: 350px;
+  height: 280px;
+  background-color: green;
+  box-sizing: border-box;
+  padding: 10px;
+  color: #FFF;
+  
+}
+  div.loginBox div.form-text 
+  {
+    margin-left: 10px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-size: 120%;
+     
+  }
+  div.loginBox input 
+  {
+    display: block;
+    width: 310px;
+    margin-left: 10px;
+    border: 2px #000 solid;
+    box-sizing: border-box;
+    height: 30px;
+    margin-bottom: 25px;
+    padding: 3px 5px;
+    outline: none; 
+  }
+  div.loginBox .loginButtons 
+  {
+    text-align: right;
+    width: 350px; 
+  }
+  div.loginBox button.submit-user 
+	{
+    color: #5a717b;
+    font-size: 120%;
+    background-color: #c8edfe;
+    width: 140px;
+    padding: 4px 0px;
+    margin-top: 10px;
+    border-radius: 3px;
+    border: none;
+    float:right;
+    margin-right: 46px; 
+  }
+  
+  div.loginBox button.cancel 
+	{
+    color: #5a717b;
+    font-size: 120%;
+    background-color: #c8edfe;
+    padding: 4px 0px;
+    width: 140px;
+    margin-top: 10px;
+    border-radius: 3px;
+    border: none;
+    float:left;
+    margin-left: 25px; 
+  }
+div#signup h1
+{
+	color: green;
+}
