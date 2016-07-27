@@ -1,4 +1,3 @@
-@@ -1,65 +1,40 @@
 package model;
 
 import javax.persistence.CascadeType;
@@ -9,8 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class User 
-{
+public class User {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
+	private String name;
 	private String username;
 	private String email;
 	@OneToOne(cascade=CascadeType.ALL)
@@ -34,26 +36,30 @@ public class User
 
 	public String getName() {
 		return name;
-		this.password = password;
-		this.id = id;
+	}
+
+	public String getUsername() {
+		return username;
 	}
 
 	public String getEmail() {
 		return email;
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public Address getBillingAddress() {
 		return billingAddress;
+	}
 
 	public Address getShippingAddress() {
 		return shippingAddress;
+	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", username=" + username
 				+ ", email=" + email + ", billingAddress=" + billingAddress
 				+ ", shippingAddress=" + shippingAddress + "]";
+	}
+	
 	
 }
