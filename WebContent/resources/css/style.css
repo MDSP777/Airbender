@@ -86,7 +86,6 @@ div.loginBox
   background-color: green;
   box-sizing: border-box;
   padding: 10px;
-  color: #FFF;
   
 }
   div.loginBox div.form-text 
@@ -95,6 +94,7 @@ div.loginBox
     margin-top: 20px;
     margin-bottom: 5px;
     font-size: 120%;
+  	color: #FFFFFF;
      
   }
   div.loginBox input 
@@ -107,7 +107,8 @@ div.loginBox
     height: 30px;
     margin-bottom: 25px;
     padding: 3px 5px;
-    outline: none; 
+    outline: none;
+  	color: #000000; 
   }
   div.loginBox .loginButtons 
   {
