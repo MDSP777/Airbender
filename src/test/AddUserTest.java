@@ -17,7 +17,7 @@ import service.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/ApplicationContext.xml" })
-public class AddPostTest {
+public class AddUserTest {
 	@Autowired
 	private UserService userService;
 	
@@ -29,13 +29,9 @@ public class AddPostTest {
 		User u = new User("Marc San Pedro", "MDSP777", "mdsp777@outlook.com", 
 				"helloworld", billingAddress, shippingAddress);
 		userService.addUser(u);
-		User u2 = new User("Marc San Pedro 2", "MDSP7772", "mdsp777@outlook.com", 
-				"goodbyeworld", billingAddress, shippingAddress);
-		userService.addUser(u2);
 		
 		String hash = userService.getHashFor("MDSP777");
 		Assert.assertTrue(BCrypt.checkpw("helloworld", hash));
-		hash = userService. getHashFor("MDSP7772");
-		Assert.assertTrue(BCrypt.checkpw("goodbyeworld", hash));
+
 	}
 }

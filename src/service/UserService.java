@@ -14,7 +14,16 @@ public class UserService extends JpaService {
 		try{
 			entityManager.persist(u);
 		} finally {
-//			closeTransaction();
+			closeTransaction();
+		}
+	}
+	
+	public User findBy(String username){
+		openTransaction();
+		try{
+			return entityManager.find(User.class, username);
+		} finally {
+			closeTransaction();
 		}
 	}
 	

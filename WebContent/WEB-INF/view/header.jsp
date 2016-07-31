@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>Aegis</title>
+	<title>SECURDE</title>
 	<link rel="stylesheet" href="<c:url value="/resources/css/style.css" />" />
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -71,7 +71,6 @@
 		</form>
 		</div>
 	</div>
-	
 	<div id="login" >
 		<h1 class = "boxHeader">Login</h1>
 		<div class="loginBox">

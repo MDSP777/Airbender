@@ -17,6 +17,8 @@ public class Address {
 	private int postalCode;
 	private String country;
 	
+	protected Address(){}
+	
 	public Address(int houseNum, String street, String subdivision,
 			String city, int postalCode, String country) {
 		super();
