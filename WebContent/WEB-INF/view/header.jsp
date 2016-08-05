@@ -27,19 +27,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="index.jsp" class="navbar-brand"><span style="font-size: 200%;">Securde</span></a>
+          <a href="patatas.htmlxxx" class="navbar-brand" style = "margin-top:10px;"><span style="font-size: 200%;">SECURDE</span></a>
         </div>
         <div id="icons" data-toggle="collapse" data-target="#navbar-ex-collapse">
             <ul id="icons-nav">
-              <li>
-                  <a href=""><div id="flood"></div></a>
-              </li>
-              <li>
-                <a href=""><div id="storm"></div></a>
-              </li>
-              <li>
-                <a href=""><div id="earthquake"></div></a>
-              </li>
+			      <div class="col-sm-10">
+			        <input type="search" class="form-control" id="search" placeholder="search item">
+			      </div>
             </ul>
         </div>
           <ul id="rightnav">
@@ -56,12 +50,18 @@
     
     <div id="signup" >
 		<h1 class = "boxheader">Sign Up</h1>
-		<div class="loginBox">
+		<div class="signupBox">
 		<form action="signup" method="post">
 			<div class="form-text" >Username</div>
 			<input type="text" name="username"/>
+			<div class="form-text" >Email Address</div>
+			<input type="text" name="email"/>
 			<div class="form-text" >Password</div>
 			<input type="password" name="password"/>
+			<div class="form-text" >Billing Address</div>
+			<input type="text" name="billingAdd"/>
+			<div class="form-text" >Shipping Address</div>
+			<input type="text" name="ShippingAdd"/>
 			<div class="loginButtons">
 				<div class = "row">
 					<button type="button" class="cancel">Cancel</button>

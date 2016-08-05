@@ -82,13 +82,23 @@ div#signup
 div.loginBox 
 {
   width: 350px;
-  height: 280px;
+  height: 270px;
   background-color: green;
   box-sizing: border-box;
   padding: 10px;
   
 }
-  div.loginBox div.form-text 
+
+div.signupBox 
+{
+  width: 350px;
+  height: 490px;
+  background-color: green;
+  box-sizing: border-box;
+  padding: 10px;
+  
+}
+  div.loginBox div.form-text, div.signupBox div.form-text 
   {
     margin-left: 10px;
     margin-top: 20px;
@@ -97,7 +107,7 @@ div.loginBox
   	color: #FFFFFF;
      
   }
-  div.loginBox input 
+  div.loginBox input, div.signupBox input 
   {
     display: block;
     width: 310px;
@@ -105,21 +115,21 @@ div.loginBox
     border: 2px #000 solid;
     box-sizing: border-box;
     height: 30px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     padding: 3px 5px;
     outline: none;
   	color: #000000; 
   }
-  div.loginBox .loginButtons 
+  div.loginBox .loginButtons,div.signupBox .loginButtons 
   {
     text-align: right;
     width: 350px; 
   }
-  div.loginBox button.submit-user 
+  div.loginBox button.submit-user, div.signupBox button.submit-user 
 	{
     color: #5a717b;
     font-size: 120%;
-    background-color: #c8edfe;
+    background-color: #d8edcb;
     width: 140px;
     padding: 4px 0px;
     margin-top: 10px;
@@ -129,11 +139,11 @@ div.loginBox
     margin-right: 46px; 
   }
   
-  div.loginBox button.cancel 
+  div.loginBox button.cancel, div.signupBox button.cancel 
 	{
     color: #5a717b;
     font-size: 120%;
-    background-color: #c8edfe;
+    background-color: #d8edcb;
     padding: 4px 0px;
     width: 140px;
     margin-top: 10px;
@@ -145,4 +155,9 @@ div.loginBox
 div#signup h1
 {
 	color: green;
+}
+
+.image-responsive
+{
+	height: 400px;
 }

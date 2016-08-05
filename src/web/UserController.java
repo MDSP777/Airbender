@@ -30,6 +30,11 @@ public class UserController {
 		request.getRequestDispatcher("WEB-INF/view/error.jsp").forward(request, response);
 	}
 	
+	@RequestMapping({"/categories"})
+	public void goToCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		request.getRequestDispatcher("WEB-INF/view/category.jsp").forward(request, response);
+	}
+	
 	@RequestMapping({"/hello"})
 	public void goToHomepage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		request.getRequestDispatcher("WEB-INF/view/hello.jsp").forward(request, response);
