@@ -10,7 +10,7 @@
           <div class="col-md-12">
             <h1 class="text-success">Sign Up</h1>
             <h4>&nbsp;</h4>
-            <h4 class="text-muted">Select your Username</h4>
+            <h4 class="text-muted">Enter your Username</h4>
           </div>
         </div>
         <div class="row">
