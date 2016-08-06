@@ -33,27 +33,31 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <table class="table table-bordered table-striped">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Product Name</th>
+                  <th>Description</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
               <tbody>
                 <tr>
                   <td><a href="#">Shoes 1</a></td>
+                  <td>Lorem Ipsum</td>
                   <td>P69</td>
                 </tr>
                 <tr>
                   <td><a href="#">Shoes 2</a></td>
+                  <td>Lorem Ipsum</td>
                   <td>P69</td>
                 </tr>
                 <tr>
                   <td><a href="#">Shoes 3</a></td>
+                  <td>Lorem Ipsum</td>
                   <td>P69</td>
                 </tr>
               </tbody>
-              <thead>
-                <tr>
-                  <th>Product Name</th>
-                  <th>Price</th>
-                </tr>
-              </thead>
             </table>
           </div>
         </div>
