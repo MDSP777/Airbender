@@ -45,15 +45,19 @@ div#navbar div#container div#icons ul#icons-nav
       display: inline-block;
       padding: 0 10px 0 10px; 
     }
+    
+    #search 
+    {
+        width: 240px;
+        margin-top:7px;
+    }
  
 /*Login*/        
 div#login
 {
   position: absolute;
-  top: 0;
-  bottom: 20%;
-  left: 0;
-  right: 0;
+  top: 80px;
+  right: 200px;
   margin: auto;
   display: none;
   width: 350px;

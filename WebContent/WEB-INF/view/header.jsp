@@ -32,7 +32,7 @@
         <div id="icons" data-toggle="collapse" data-target="#navbar-ex-collapse">
             <ul id="icons-nav">
 			      <div class="col-sm-10">
-			        <input type="search" class="form-control" id="search" placeholder="search item">
+			        <input type="search" class="form-control" id="search" placeholder="Search Item">
 			      </div>
             </ul>
         </div>
@@ -50,7 +50,6 @@
     
     
 	<div id="login" >
-		<h1 class = "boxHeader">Login</h1>
 		<div class="loginBox">
 		<form action="login" method="post">
 			<div class="form-text" >Username</div>
