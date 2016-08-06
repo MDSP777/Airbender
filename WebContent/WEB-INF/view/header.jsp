@@ -42,35 +42,13 @@
 				<a id="login-button">Login</a>
 			</li>
 			<li>
-				<a id="signup-button">Sign Up</a>
+				<a href="signup" id="signup-button">Sign Up</a>
 			</li>
 		</ul>
       </div>
     </div>
     
-    <div id="signup" >
-		<h1 class = "boxheader">Sign Up</h1>
-		<div class="signupBox">
-		<form action="signup" method="post">
-			<div class="form-text" >Username</div>
-			<input type="text" name="username"/>
-			<div class="form-text" >Email Address</div>
-			<input type="text" name="email"/>
-			<div class="form-text" >Password</div>
-			<input type="password" name="password"/>
-			<div class="form-text" >Billing Address</div>
-			<input type="text" name="billingAdd"/>
-			<div class="form-text" >Shipping Address</div>
-			<input type="text" name="ShippingAdd"/>
-			<div class="loginButtons">
-				<div class = "row">
-					<button type="button" class="cancel">Cancel</button>
-					<button type="submit" class="submit-user">Sign Up</button>
-				</div>
-			</div>
-		</form>
-		</div>
-	</div>
+    
 	<div id="login" >
 		<h1 class = "boxHeader">Login</h1>
 		<div class="loginBox">

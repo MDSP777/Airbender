@@ -70,11 +70,10 @@ div#signup
 {
   position: absolute;
   top: 0;
-  bottom: 20%;
+  bottom: 50%;
   left: 0;
   right: 0;
   margin: auto;
-  display: none;
   width: 350px;
   height: 300px;
   z-index: 1;
@@ -92,7 +91,7 @@ div.loginBox
 div.signupBox 
 {
   width: 350px;
-  height: 490px;
+  height: 1600px;
   background-color: green;
   box-sizing: border-box;
   padding: 10px;
