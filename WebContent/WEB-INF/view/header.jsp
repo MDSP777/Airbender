@@ -29,21 +29,32 @@
           </button>
           <a href="patatas.htmlxxx" class="navbar-brand" style = "margin-top:10px;"><span style="font-size: 200%;">SECURDE</span></a>
         </div>
-        <div id="icons" data-toggle="collapse" data-target="#navbar-ex-collapse">
-            <ul id="icons-nav">
-			      <div class="col-sm-10">
-			        <input type="search" class="form-control" id="search" placeholder="Search Item">
-			      </div>
-            </ul>
-        </div>
+<!--         <div id="icons" data-toggle="collapse" data-target="#navbar-ex-collapse"> -->
+<!--             <ul id="icons-nav"> -->
+<!-- 			      <div class="col-sm-10"> -->
+<!-- 			        <input type="search" class="form-control" id="search" placeholder="Search Item"> -->
+<!-- 			      </div> -->
+<!--             </ul> -->
+<!--         </div> -->
           <ul id="rightnav">
-			
-			<li>
-				<a id="login-button">Login</a>
-			</li>
-			<li>
-				<a href="signup" id="signup-button">Sign Up</a>
-			</li>
+			<c:choose>
+			  <c:when test="${user==null }">
+				<li>
+					<a id="login-button">Login</a>
+				</li>
+				<li>
+					<a href="signup" id="signup-button">Sign Up</a>
+				</li>
+			  </c:when>
+			  <c:otherwise>
+			  	<li>
+			  		<a>Hi, ${user.firstName }!</a>
+			  	</li>
+			  	<li>
+					<a href="logout" id="signup-button">Logout</a>
+			  	</li>
+			  </c:otherwise>
+			</c:choose>
 		</ul>
       </div>
     </div>

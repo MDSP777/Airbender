@@ -10,17 +10,17 @@ public class Address {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	private int houseNum;
+	private String houseNum;
 	private String street;
 	private String subdivision;
 	private String city;
-	private int postalCode;
+	private String postalCode;
 	private String country;
 	
 	protected Address(){}
 	
-	public Address(int houseNum, String street, String subdivision,
-			String city, int postalCode, String country) {
+	public Address(String houseNum, String street, String subdivision,
+			String city, String postalCode, String country) {
 		super();
 		this.houseNum = houseNum;
 		this.street = street;
@@ -34,7 +34,7 @@ public class Address {
 		return id;
 	}
 
-	public int getHouseNum() {
+	public String getHouseNum() {
 		return houseNum;
 	}
 
@@ -50,7 +50,7 @@ public class Address {
 		return city;
 	}
 
-	public int getPostalCode() {
+	public String getPostalCode() {
 		return postalCode;
 	}
 

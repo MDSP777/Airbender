@@ -11,7 +11,9 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 
 @Entity
 public class User {
-	private String name;
+	private String firstName;
+	private String middleName;
+	private String lastName;
 	@Id
 	private String username;
 	private String email;
@@ -24,20 +26,19 @@ public class User {
 	
 	protected User(){}
 	
-	public User(String name, String username, String email, String pw,
+	public User(String firstName, String middleName, String lastName, 
+			String username, String email, String pw,
 			Address billingAddress, Address shippingAddress) {
 		super();
-		this.name = name;
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
 		this.username = username;
 		this.email = email;
 		this.salt = BCrypt.gensalt(12);
 		this.password = BCrypt.hashpw(pw, salt);
 		this.billingAddress = billingAddress;
 		this.shippingAddress = shippingAddress;
-	}
-	
-	public String getName() {
-		return name;
 	}
 
 	public String getUsername() {
@@ -56,12 +57,26 @@ public class User {
 		return shippingAddress;
 	}
 
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getMiddleName() {
+		return middleName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
 	@Override
 	public String toString() {
-		return "User [name=" + name + ", username=" + username
-				+ ", email=" + email + ", billingAddress=" + billingAddress
+		return "User [firstName=" + firstName + ", middleName=" + middleName
+				+ ", lastName=" + lastName + ", username=" + username
+				+ ", email=" + email + ", password=" + password + ", salt="
+				+ salt + ", billingAddress=" + billingAddress
 				+ ", shippingAddress=" + shippingAddress + "]";
 	}
-	
+
 	
 }

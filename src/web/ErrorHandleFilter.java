@@ -33,7 +33,6 @@ public class ErrorHandleFilter implements Filter {
 					((HttpServletResponse)response);
 			chain.doFilter(request, res);
 			res.addHeader("X-FRAME-OPTIONS", Modes.DENY);
-			System.out.println("lol");
 		} catch (Exception ex) {
 			request.setAttribute("errorMessage", ex);
 			request.getRequestDispatcher("/WEB-INF/view/error.jsp").forward(request, response);

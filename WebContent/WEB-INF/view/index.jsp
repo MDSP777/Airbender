@@ -21,28 +21,28 @@
       <div class="container">
         <div class="row">
           <div class="col-md-3">
-            <a href="categories"><img src="https://unsplash.imgix.net/photo-1422728221357-57980993ea99?w=1024&amp;q=50&amp;fm=jpg&amp;s=b4a34018d745e33048bcfc326cb9907b" class="img-responsive"></a>
+            <a href="categories?type=boots"><img src="https://unsplash.imgix.net/photo-1422728221357-57980993ea99?w=1024&amp;q=50&amp;fm=jpg&amp;s=b4a34018d745e33048bcfc326cb9907b" class="img-responsive"></a>
             <h2>Boots</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
               <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
               <br>Ut enim ad minim veniam, quis nostrud</p>
-          </div>
+          </div>	
           <div class="col-md-3">
-            <a href="categories"><img src="https://unsplash.imgix.net/photo-1422728221357-57980993ea99?w=1024&amp;q=50&amp;fm=jpg&amp;s=b4a34018d745e33048bcfc326cb9907b" class="img-responsive"></a>
+            <a href="categories?type=shoes"><img src="https://unsplash.imgix.net/photo-1422728221357-57980993ea99?w=1024&amp;q=50&amp;fm=jpg&amp;s=b4a34018d745e33048bcfc326cb9907b" class="img-responsive"></a>
             <h2>Shoes</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
               <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
               <br>Ut enim ad minim veniam, quis nostrud</p>
           </div>
           <div class="col-md-3">
-            <a href="categories"><img src="https://unsplash.imgix.net/photo-1422728221357-57980993ea99?w=1024&amp;q=50&amp;fm=jpg&amp;s=b4a34018d745e33048bcfc326cb9907b" class="img-responsive"></a>
+            <a href="categories?type=sandals"><img src="https://unsplash.imgix.net/photo-1422728221357-57980993ea99?w=1024&amp;q=50&amp;fm=jpg&amp;s=b4a34018d745e33048bcfc326cb9907b" class="img-responsive"></a>
             <h2>Sandals</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
               <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
               <br>Ut enim ad minim veniam, quis nostrud</p>
           </div>
           <div class="col-md-3">
-            <a href="categories"><img src="https://unsplash.imgix.net/photo-1422728221357-57980993ea99?w=1024&amp;q=50&amp;fm=jpg&amp;s=b4a34018d745e33048bcfc326cb9907b" class="img-responsive"></a>
+            <a href="categories?type=slippers"><img src="https://unsplash.imgix.net/photo-1422728221357-57980993ea99?w=1024&amp;q=50&amp;fm=jpg&amp;s=b4a34018d745e33048bcfc326cb9907b" class="img-responsive"></a>
             <h2>Slippers</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
               <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.

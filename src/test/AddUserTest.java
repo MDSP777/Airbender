@@ -23,12 +23,12 @@ public class AddUserTest {
 	
 	@Test
 	public void addUser(){
-		Address billingAddress = new Address(9, "Glacier Street", "Merville", "Paranaque City", 1700, "Philippines");
-		Address shippingAddress = new Address(2401, "Taft Ave.", "Malate", "Manila", 1234, "Philippines");
+		Address billingAddress = new Address("9", "Glacier Street", "Merville", "Paranaque City", "1700", "Philippines");
+		Address shippingAddress = new Address("2401", "Taft Ave.", "Malate", "Manila", "1234", "Philippines");
 		
-		User u = new User("Marc San Pedro", "MDSP777", "mdsp777@outlook.com", 
+		User u = new User("Marc", "", "San Pedro", "MDSP777", "mdsp777@outlook.com", 
 				"helloworld", billingAddress, shippingAddress);
-		userService.addUser(u);
+		userService.register(u);
 		
 		String hash = userService.getHashFor("MDSP777");
 		Assert.assertTrue(BCrypt.checkpw("helloworld", hash));
