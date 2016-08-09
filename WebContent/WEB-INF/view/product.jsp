@@ -3,13 +3,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <jsp:include page="header.jsp"/>
 
-    
-    
+   
     <div class="section">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h1>Shoes 1</h1>
+            <div class="row">
+              <div class="col-md-2">
+                <h1 style="width: 200px;">Shoes 1</h1>
+              </div>
+              
+              <!-- if != productAdmin then hide this -->
+              <div style="margin-top: 20px;">
+                <a href="editproduct"><i class="fa fa-2x fa-edit fa-fw pull-right text-success"></i></a>
+              </div>
+              
+            </div>
             <h3 class="text-muted">Price: 69.00 php</h3>
             <h3>Details</h3>
             <p class="lead">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo

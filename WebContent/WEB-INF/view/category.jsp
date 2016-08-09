@@ -70,7 +70,7 @@
               <tbody>
                 <c:forEach var="product" items="${products }">
 	                <tr>
-	                  <td><a href="#">${product.name }</a></td>
+	                  <td><a href="product">${product.name }</a></td>
 	                  <td>${product.description }</td>
 	                  <td>P${product.price }</td>
 	                </tr>

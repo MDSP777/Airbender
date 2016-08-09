@@ -178,6 +178,19 @@
                   <input type="text" class="form-control" placeholder="Country" name="shipCountry">
                 </div>
               </div>
+              
+              <!-- Used when an admin adds a product or financial manager -->
+              <div class="form-group" style="display: none;">
+                <div class="col-sm-2">
+                  <label class="control-label">Role</label>
+                </div>
+                <div class="col-sm-10">
+                  <select class="form-control">
+                    <option>Product Manager</option>
+                    <option>Financial Manager</option>
+                  </select>
+                </div>
+              </div>
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                   <button type="submit" class="btn btn-success" contenteditable="true">Sign Up</button>
