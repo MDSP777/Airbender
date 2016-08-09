@@ -11,7 +11,7 @@
             class="img-responsive">
           </div>
           <div class="col-md-6">
-            <h1>Shoes 1</h1>
+            <h1>${product.name }</h1>
             <div class="row">
               <div class="col-md-6">
                 <h4 contenteditable="true" class="text-muted">Quantity:&nbsp;</h4>
@@ -21,14 +21,7 @@
               </div>
             </div>
             <h3>Details</h3>
-            <p class="lead">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-              ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
-              dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies
-              nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-              Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In
-              enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum
-              felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
-              elementum semper nisi.</p>
+            <p class="lead">${product.description }</p>
             <h3>Reviews</h3>
             <p class="text-muted">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
               ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis

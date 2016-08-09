@@ -26,41 +26,13 @@ import service.UserService;
 public class UserController {
 	@Autowired
 	private UserService uService;
-	@Autowired
-	private ProductService pService;
 	private User user;
-	
-	@RequestMapping({"/patatas.htmlxxx", "/"})
-	public void goToIndex(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
-	}
-	
-	@RequestMapping({"/error"})
-	public void error(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		request.getRequestDispatcher("WEB-INF/view/error.jsp").forward(request, response);
-	}
 	
 	@RequestMapping({"/signup"})
 	public void signup(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		request.getRequestDispatcher("WEB-INF/view/signup.jsp").forward(request, response);
 	}
 	
-	@RequestMapping({"/categories"})
-	public void goToCategory(@RequestParam String type, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		request.setAttribute("type", type);
-		try {
-			Collection<Product> products = pService.findByType(type);
-			request.setAttribute("products", products);
-		} catch(InvalidCategoryException e){
-			e.printStackTrace();
-		}
-		request.getRequestDispatcher("WEB-INF/view/category.jsp").forward(request, response);
-	}
-	
-	@RequestMapping({"/hello"})
-	public void goToHomepage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		request.getRequestDispatcher("WEB-INF/view/hello.jsp").forward(request, response);
-	}
 	
 	@RequestMapping({"/login"})
 	public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	

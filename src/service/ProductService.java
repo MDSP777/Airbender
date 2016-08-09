@@ -36,5 +36,12 @@ public class ProductService extends JpaService {
 		}
 	}
 	
-	
+	public Product findBy(int id) {
+		openTransaction();
+		try{
+			return entityManager.find(Product.class, id);
+		} finally {
+			closeTransaction();
+		}
+	}
 }
