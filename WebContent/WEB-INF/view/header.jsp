@@ -50,6 +50,22 @@
 			  	<li>
 			  		<a>Hi, ${user.firstName }!</a>
 			  	</li>
+			  	
+				<li>
+					<a href="categories?type=productManager" id="pm-button">Manage Products</a>
+				</li>
+			</c:if>
+			
+				<li>
+					<a href="ad" id="ad-button">Manage Accounts</a>
+				</li>
+			</c:if>
+			
+				<li>
+					<a href="view_sales_reports?total" id="am-button">View Sales Reports</a>
+				</li>
+			</c:if>
+			  	
 			  	<li>
 					<a href="logout" id="signup-button">Logout</a>
 			  	</li>
