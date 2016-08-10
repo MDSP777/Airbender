@@ -21,6 +21,24 @@ public class ProductService extends JpaService {
 		}
 	}
 	
+	public void updateProduct(Product p){
+		openTransaction();
+		try{
+			entityManager.merge(p);
+		} finally {
+			closeTransaction();
+		}
+	}
+	
+	public void deleteProduct(Product p){
+		openTransaction();
+		try{
+			entityManager.remove(p);
+		} finally {
+			closeTransaction();
+		}
+	}
+	
 	public Collection<Product> findByType(String type) throws InvalidCategoryException{
 		openTransaction();
 		try{
@@ -36,6 +54,7 @@ public class ProductService extends JpaService {
 		}
 	}
 	
+<<<<<<< HEAD
 	public Product getProduct(int id)
 	{
 		openTransaction();
@@ -61,4 +80,14 @@ public class ProductService extends JpaService {
 	}
 	
 	
+=======
+	public Product findBy(int id) {
+		openTransaction();
+		try{
+			return entityManager.find(Product.class, id);
+		} finally {
+			closeTransaction();
+		}
+	}
+>>>>>>> origin/master
 }

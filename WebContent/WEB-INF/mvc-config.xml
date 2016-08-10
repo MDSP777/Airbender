@@ -8,6 +8,8 @@
 
          <context:component-scan
             base-package="web"/>
+         <context:component-scan
+            base-package="model"/>
 
 
     <mvc:annotation-driven />
