@@ -27,7 +27,8 @@
               </li>
             </ul>
             <form>
-              <input name="review" placeholder=" Write a review ... " id="review">
+              <input name="review" placeholder=" Write a review ... " id="review"><br>
+              <button type="submit" class="btn btn-success">Submit Review</button>
             </form>
             <div class="row">
               <div class="col-md-6"></div>
@@ -44,7 +45,8 @@
                 <h4 class="text-muted" contenteditable="false" id="total-price">Total: 0 php</h4>
               </div>
               <div class="col-md-2">
-                <button type="button" class="btn btn-info btn-lg" id="purchase" data-toggle="modal" data-target="#purchaseModal">Purchase</button>
+                <button type="button" class="btn btn-success btn-lg" id="purchase" data-toggle="modal" data-target="#purchaseModal"
+                style="width: 165px;">Purchase</button>
               </div>
               
               
