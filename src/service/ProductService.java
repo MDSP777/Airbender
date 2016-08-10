@@ -21,6 +21,24 @@ public class ProductService extends JpaService {
 		}
 	}
 	
+	public void updateProduct(Product p){
+		openTransaction();
+		try{
+			entityManager.merge(p);
+		} finally {
+			closeTransaction();
+		}
+	}
+	
+	public void deleteProduct(Product p){
+		openTransaction();
+		try{
+			entityManager.remove(p);
+		} finally {
+			closeTransaction();
+		}
+	}
+	
 	public Collection<Product> findByType(String type) throws InvalidCategoryException{
 		openTransaction();
 		try{

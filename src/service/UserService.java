@@ -21,13 +21,23 @@ public class UserService extends JpaService {
 		}
 	}
 	
+	public void update(User u){
+		openTransaction();
+		try{
+			entityManager.merge(u);
+			System.out.println("Updated User: "+u);
+		} finally {
+			closeTransaction();
+		}
+	}
+	
 	public User findBy(String username){
 		openTransaction();
 		try{
 			System.out.println("Retrieving "+username);
 			return entityManager.find(User.class, username);
 		} finally {
-			closeTransaction();
+//			closeTransaction();
 		}
 	}
 	

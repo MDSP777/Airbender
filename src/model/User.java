@@ -1,18 +1,24 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.stereotype.Component;
+
+import service.PurchaseService;
 
 @Entity
+@Component
 public class User {
 	private String firstName;
 	private String middleName;
@@ -26,8 +32,11 @@ public class User {
 	private Address billingAddress;
 	@OneToOne(cascade=CascadeType.ALL)
 	private Address shippingAddress;
-	
+	@ElementCollection
 	private Collection<Integer> purchasedProducts;
+	
+	@Transient
+	private static PurchaseService oService;
 	
 	protected User(){}
 	
@@ -45,9 +54,20 @@ public class User {
 		this.billingAddress = billingAddress;
 		this.shippingAddress = shippingAddress;
 		
-		purchasedProducts = new ArrayList<Integer>();
+		purchasedProducts = new HashSet<Integer>();
 	}
 
+	@PostConstruct
+	public void init() {
+	    System.out.println("Initializing PurchaseService as [" +
+	                oService + "]");
+	}
+	
+	@Autowired
+	public void setPurchaseService(PurchaseService oService) {
+	    this.oService = oService;
+	}
+	
 	public String getUsername() {
 		return username;
 	}
@@ -74,6 +94,16 @@ public class User {
 
 	public String getLastName() {
 		return lastName;
+	}
+	
+	public void order(Product p, int quantity){
+		Purchase o = new Purchase(this, p, quantity);
+		oService.addPurchase(o);
+		purchasedProducts.add(p.getId());
+	}
+	
+	public boolean hasPurchased(Product p){
+		return purchasedProducts.contains(p.getId());
 	}
 
 	@Override

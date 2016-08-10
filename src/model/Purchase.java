@@ -7,7 +7,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Order {
+public class Purchase {
+	public static String TOTAL = "total";
+	public static String CATEGORY = "category";
+	public static String PRODUCT = "product";
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -18,9 +22,9 @@ public class Order {
 	private int quantity;
 	private double totalPrice;
 	
-	protected Order(){}
+	protected Purchase(){}
 	
-	public Order(User user, Product product, int quantity, double totalPrice) {
+	public Purchase(User user, Product product, int quantity) {
 		super();
 		this.user = user;
 		this.product = product;
@@ -46,6 +50,12 @@ public class Order {
 
 	public double getTotalPrice() {
 		return totalPrice;
+	}
+
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", user=" + user + ", product=" + product.getId()
+				+ ", quantity=" + quantity + ", totalPrice=" + totalPrice + "]";
 	}
 	
 	

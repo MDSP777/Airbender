@@ -1,6 +1,7 @@
 package web;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.servlet.ServletException;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Address;
+import model.Purchase;
 import model.Product;
 import model.User;
 
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import exceptions.InvalidCategoryException;
 import exceptions.UsernameOrEmailAlreadyTakenException;
+import service.PurchaseService;
 import service.ProductService;
 import service.UserService;
 
@@ -26,6 +29,10 @@ import service.UserService;
 public class UserController {
 	@Autowired
 	private UserService uService;
+	@Autowired
+	private ProductService pService;
+	@Autowired
+	private PurchaseService oService;
 	private User user;
 	
 	@RequestMapping({"/signup"})
@@ -48,6 +55,34 @@ public class UserController {
 		} else {
 			response.sendRedirect("error");
 		}
+	}
+
+	@RequestMapping({"/pm"})
+	public void productManager(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		request.getRequestDispatcher("WEB-INF/view/productManager.jsp").forward(request, response);
+	}
+	
+	@RequestMapping({"/view_sales_reports"})
+	public void accountingManager(@RequestParam String type, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		request.setAttribute("type", type);
+		Collection<Object[]> results = new ArrayList<Object[]>();
+		if(Purchase.TOTAL.equals(type)){
+			double totalSales = oService.getTotalSales();
+			results.add(new Object[]{"Total Sales", totalSales});
+		} else if(Purchase.CATEGORY.equals(type)){
+			results = oService.getTotalSalesByType();
+		} else if(Purchase.PRODUCT.equals(type)){
+			results = oService.getTotalSalesById();
+		} else {
+			
+		}
+		request.setAttribute("sales", results);
+		request.getRequestDispatcher("WEB-INF/view/financialManager.jsp").forward(request, response);
+	}
+	
+	@RequestMapping({"/ad"})
+	public void admin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		request.getRequestDispatcher("WEB-INF/view/admin.jsp").forward(request, response);
 	}
 	
 	@RequestMapping({"/logout"})
@@ -98,5 +133,17 @@ public class UserController {
 		
 	}
 	
-	
+
+//	@RequestMapping({"/testshit"})
+//	public void goToTESTSHIT(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+//		if(user!=null){
+//			System.out.println("HI");
+//			user.order(pService.findBy(2), 2);
+//			user.order(pService.findBy(4), 2);
+//			user.order(pService.findBy(6), 2);
+//			user.order(pService.findBy(8), 2);
+//			uService.update(user);
+//			
+//		}
+//	}
 }

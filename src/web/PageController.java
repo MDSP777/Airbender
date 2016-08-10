@@ -55,4 +55,5 @@ public class PageController {
 		request.setAttribute("product", p);
 		request.getRequestDispatcher("WEB-INF/view/product.jsp").forward(request, response);
 	}
+	
 }
