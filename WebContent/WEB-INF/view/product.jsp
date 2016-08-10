@@ -23,7 +23,7 @@
             <ul class="list-group">
               <li class="list-group-item">
                 <h4>User 1</h4>Item is shit, don't buy
-                <span class="badge">5/5</span>
+<!--                 <span class="badge">5/5</span> -->
               </li>
             </ul>
             <form>
@@ -41,7 +41,7 @@
                   <input type="hidden" name="price" val="69.00">
               </div>
               <div class="col-md-2 text-right">
-                <h4 class="text-muted" contenteditable="false" id="total-price">Total: 69.00 php</h4>
+                <h4 class="text-muted" contenteditable="false" id="total-price">Total Price: 0 php</h4>
               </div>
               <div class="col-md-2">
                 <button type="button" class="btn btn-info btn-lg" id="purchase" data-toggle="modal" data-target="#purchaseModal">Purchase</button>
@@ -68,12 +68,14 @@
 			    </form>
 			    <script>
 				    $('#purchase').click(function(){
-				        $('#confirmMessage').text('You are purchasing ' + $('#quantity').val() + ' Shoes 1 for ' + parseFloat($('#quantity').val()) * parseFloat($('#price').val())+ ' php')
-				   	})
+				        $('#confirmMessage').text('You are purchasing ' + $('#quantity').val() + ' ${product.name } for ' + parseFloat($('#quantity').val()) * parseFloat(${product.price }) + ' php')
+				   	});
 	
-				   $('#quantity').click(function(){
-				        $('#total-price').text('Total Price: ' + (number($('#quantity').val()) * number($('#price').val())))
-				   })
+				   $('#quantity').focusout(function(){
+					   total = parseFloat($('#quantity').val()) * parseFloat(${product.price });
+					   if(isNaN(total)) total = 0;
+				       $('#total-price').text('Total Price: ' + total + ' php');
+				   });
 			    
 			    </script>
 			     
