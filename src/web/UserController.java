@@ -39,22 +39,6 @@ public class UserController {
 	public void signup(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		request.getRequestDispatcher("WEB-INF/view/signup.jsp").forward(request, response);
 	}
-	
-	@RequestMapping({"/login"})
-	public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		String username = request.getParameter("username");
-		String pw = request.getParameter("password");
-		
-		String hash = uService.getHashFor(username);
-		if(BCrypt.checkpw(pw, hash)){
-			User u = uService.findBy(username);
-			request.getSession().setAttribute("user", u);
-			user = u;
-			request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
-		} else {
-			response.sendRedirect("error");
-		}
-	}
 
 	@RequestMapping({"/pm"})
 	public void productManager(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
@@ -83,6 +67,28 @@ public class UserController {
 	public void admin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		request.getRequestDispatcher("WEB-INF/view/admin.jsp").forward(request, response);
 	}
+    
+    @RequestMapping(value="/login", method = RequestMethod.POST)
+	public void loginPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		String username = request.getParameter("username");
+		String pw = request.getParameter("password");
+		
+		String hash = uService.getHashFor(username);
+		if(BCrypt.checkpw(pw, hash)){
+			User u = uService.findBy(username);
+			request.getSession().setAttribute("user", u);
+			user = u;
+			response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+			request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
+		} else {
+			response.sendRedirect("");
+		}
+	}
+	
+	@RequestMapping(value="/login", method=RequestMethod.GET)
+	public void loginGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		response.sendRedirect("");
+	}
 	
 	@RequestMapping({"/logout"})
 	public void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
@@ -90,8 +96,11 @@ public class UserController {
 			System.out.println("Logging out "+user.getUsername());
 			user = null;
 			request.getSession().setAttribute("user", user);
+			request.getSession().invalidate();
 		}
-		response.sendRedirect("");
+        response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+		response.setHeader("Location", "https://localhost:8443/SECURDE/");
+//		response.sendRedirect("");
 	}
 	
 	@RequestMapping({"/register"})
