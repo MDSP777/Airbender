@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <jsp:include page="header.jsp"/>
-	<script src="<c:url value="/resources/js/confirmPurchase.js" />" type="text/javascript"></script>
 
    
     <div class="section">
@@ -40,7 +39,7 @@
                   <input type="hidden" name="price" val="${product.price }" id="price"/>
                   <input type="hidden" name="productId" val="${product.id }" id="productId"/>
 	              <div class="col-md-1">
-	                  <input type="number" class="quantity-input" name="quantity" id="quantity"/>
+	                  <input type="number" class="quantity-input" name="quantity" id="quantity" min="0" required/>
 	              </div>
 	              <div class="col-md-2 text-right">
 	                <h4 class="text-muted" contenteditable="false" id="total-price">Total: 0 php</h4>
@@ -62,7 +61,7 @@
 					        <div class="modal-body">
 					          <p id="confirmMessage"></p><br>  
 			                  <label for="inputEmail3" class="control-label">Credit Card Number: &nbsp; </label>
-			                  <input type="text" class="text-input" name="creditcard" id="creditcard">
+			                  <input type="text" class="text-input" name="creditcard" id="creditcard" required>
 					        </div>
 					        <div class="modal-footer">
 					          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -71,10 +70,10 @@
 					      </div>
 					    <script>
 						    $('#purchase').click(function(){
-						        $('#confirmMessage').text('You are purchasing ' + $('#quantity').val() + ' ${product.name } for ' + parseFloat($('#quantity').val()) * parseFloat(${product.price }) + ' php')
+						    	$('#confirmMessage').text('You are purchasing ' + $('#quantity').val() + ' ${product.name } for ' + parseFloat($('#quantity').val()) * parseFloat(${product.price }) + ' php')
 						   	});
 			
-						   $('#quantity').focusout(function(){
+						   $('#quantity').click(function(){
 							   total = parseFloat($('#quantity').val()) * parseFloat(${product.price });
 							   if(isNaN(total)) total = 0;
 						       $('#total-price').text('Total: ' + total + ' php');

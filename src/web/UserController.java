@@ -79,13 +79,13 @@ public class UserController {
 			response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 			request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
 		} else {
-			response.sendRedirect("");
+			response.sendRedirect("home");
 		}
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public void loginGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		response.sendRedirect("");
+		response.sendRedirect("home");
 	}
 	
 	@RequestMapping({"/logout"})
@@ -97,7 +97,7 @@ public class UserController {
 			request.getSession().invalidate();
 		}
         response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-		response.setHeader("Location", "https://localhost:8443/SECURDE/");
+		response.setHeader("Location", "https://localhost:8443/Airbender/");
 //		response.sendRedirect("");
 	}
 	
@@ -106,6 +106,7 @@ public class UserController {
 		String username = request.getParameter("username");
 		String email = request.getParameter("email");
 		String pw = request.getParameter("password");
+		String cpw = request.getParameter("confirmpassword");
 
 		String fName = request.getParameter("fname");
 		String mName = request.getParameter("mname");
@@ -132,7 +133,7 @@ public class UserController {
 			uService.validate(email, username);
 			User u = new User(fName, mName, lName, username, email, pw, billingAddress, shippingAddress);
 			uService.register(u);
-			response.sendRedirect("");
+			response.sendRedirect("home");
 		} catch (UsernameOrEmailAlreadyTakenException e){
 			e.printStackTrace();
 		}	

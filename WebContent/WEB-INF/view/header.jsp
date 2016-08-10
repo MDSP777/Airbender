@@ -27,7 +27,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="" class="navbar-brand" style = "margin-top:10px;"><span style="font-size: 200%;">SECURDE</span></a>
+          <a href="patatas.htmlxxx" class="navbar-brand" style = "margin-top:10px;"><span style="font-size: 200%;">SECURDE</span></a>
         </div>
 <!--         <div id="icons" data-toggle="collapse" data-target="#navbar-ex-collapse"> -->
 <!--             <ul id="icons-nav"> -->
@@ -82,9 +82,9 @@
 	<div id="login" >
 		<div class="loginBox">
 		<form action="login" method="post">
-			<div class="form-text" >Username</div>
+			<div class="form-text" required>Username</div>
 			<input type="text" name="username"/>
-			<div class="form-text" >Password</div>
+			<div class="form-text" required>Password</div>
 			<input type="password" name="password"/>
 			<div class="loginButtons">
 				<div class = "row">
