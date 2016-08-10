@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <jsp:include page="header.jsp"/>
-<script src="<c:url value="/resources/js/confirmPurchase.js" />" type="text/javascript"></script>
+	<script src="<c:url value="/resources/js/confirmPurchase.js" />" type="text/javascript"></script>
 
    
     <div class="section">
@@ -37,11 +37,11 @@
               <div class="col-md-1">
                 
               <form class="quantity-input">
-                  <input type="number" class="quantity-input" name="quantity">
-                  <input type="hidden" name="price" val=69.00>
+                  <input type="number" class="quantity-input" name="quantity" id="quantity">
+                  <input type="hidden" name="price" val="69.00">
               </div>
               <div class="col-md-2 text-right">
-                <h4 class="text-muted" contenteditable="true">Total: 69.00 php</h4>
+                <h4 class="text-muted" contenteditable="false" id="total-price">Total: 69.00 php</h4>
               </div>
               <div class="col-md-2">
                 <button type="button" class="btn btn-info btn-lg" id="purchase" data-toggle="modal" data-target="#purchaseModal">Purchase</button>
@@ -59,11 +59,6 @@
 			        </div>
 			        <div class="modal-body">
 			          <p id="confirmMessage"></p>
-			          <script>
-						$('#purchase').click(function(){
-						     $('#confirmMessage').text('You are purchasing ' + $('#quantity').val() + ' Shoes 1 for ' + $('#quantity').val() * $('#price').val() + ' php')
-						})
-						</script>
 			        </div>
 			        <div class="modal-footer">
 			          <button type="submit" class="btn btn-default" data-dismiss="modal">Confirm</button>
@@ -71,6 +66,16 @@
 			        </div>
 			      </div>
 			    </form>
+			    <script>
+				    $('#purchase').click(function(){
+				        $('#confirmMessage').text('You are purchasing ' + $('#quantity').val() + ' Shoes 1 for ' + parseFloat($('#quantity').val()) * parseFloat($('#price').val())+ ' php')
+				   	})
+	
+				   $('#quantity').click(function(){
+				        $('#total-price').text('Total Price: ' + (number($('#quantity').val()) * number($('#price').val())))
+				   })
+			    
+			    </script>
 			     
 			    </div>
 			  </div>

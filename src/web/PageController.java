@@ -32,16 +32,43 @@ public class PageController {
 		request.getRequestDispatcher("WEB-INF/view/error.jsp").forward(request, response);
 	}
 	
+	@RequestMapping({"/product"})
+	public void viewProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		request.getRequestDispatcher("WEB-INF/view/product.jsp").forward(request, response);
+	}
+	
 	@RequestMapping({"/categories"})
 	public void goToCategory(@RequestParam String type, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		request.setAttribute("type", type);
-		try {
-			Collection<Product> products = pService.findByType(type);
+		
+		if(type.equals("productManager"))
+		{
+			Collection<Product> products;
+			products = pService.getAllProducts();
 			request.setAttribute("products", products);
-		} catch(InvalidCategoryException e){
-			e.printStackTrace();
+			request.getRequestDispatcher("WEB-INF/view/categoryPM.jsp").forward(request, response);
 		}
-		request.getRequestDispatcher("WEB-INF/view/category.jsp").forward(request, response);
+		else
+		{
+			try {
+				Collection<Product> products = pService.findByType(type);
+				request.setAttribute("products", products);
+			} catch(InvalidCategoryException e){
+				e.printStackTrace();
+			}
+			request.getRequestDispatcher("WEB-INF/view/category.jsp").forward(request, response);
+			
+		}
+	}
+	
+	@RequestMapping({"/editproduct"})
+	public void editProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		request.getRequestDispatcher("WEB-INF/view/productManager.jsp").forward(request, response);
+	}
+	
+	@RequestMapping({"/addproduct"})
+	public void addProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		request.getRequestDispatcher("WEB-INF/view/productManager.jsp").forward(request, response);
 	}
 
 	@RequestMapping({"/hello"})
