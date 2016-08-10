@@ -54,6 +54,31 @@ public class ProductService extends JpaService {
 		}
 	}
 	
+	public Product getProduct(int id)
+	{
+		openTransaction();
+		try{
+			TypedQuery<Product> query = entityManager.createQuery("SELECT p FROM Product p "
+					+ "WHERE p.id=:id", Product.class)
+					.setParameter("id", id);
+			return query.getSingleResult();
+		} finally {
+			closeTransaction();
+		}
+		
+	}
+	
+	public Collection<Product> getAllProducts(){
+		openTransaction();
+		try{
+			TypedQuery<Product> query = entityManager.createQuery("SELECT p FROM Product p ", Product.class);
+			return query.getResultList();
+		} finally {
+			closeTransaction();
+		}
+	}
+	
+	
 	public Product findBy(int id) {
 		openTransaction();
 		try{

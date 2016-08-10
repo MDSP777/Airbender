@@ -58,7 +58,9 @@
                 <div class="col-sm-offset-2 col-sm-10">
                   <button type="submit" class="btn btn-default btn-sm">Save</button>
                   <button type="button" class="btn btn-default btn-sm">Cancel</button>
+                  <!-- if product == null then hide this -->
                   <button type="submit" class="btn btn-danger btn-sm">Delete Product</button>
+                  
                 </div>
               </div>
             </form>

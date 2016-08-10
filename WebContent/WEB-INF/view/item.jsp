@@ -14,7 +14,7 @@
             <h1>${product.name }</h1>
             <div class="row">
               <div class="col-md-6">
-                <h4 contenteditable="true" class="text-muted">Quantity:&nbsp;</h4>
+                <h4 contenteditable="false" class="text-muted">Quantity:&nbsp;</h4>
               </div>
               <div class="col-md-6">
                 <a href="#"><i class="fa fa-3x fa-cart-plus fa-fw pull-right text-success"></i></a>

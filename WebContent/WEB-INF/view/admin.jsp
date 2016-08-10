@@ -7,14 +7,14 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h1 contenteditable="true" style="margin-bottom:20px;">User Accounts</h1>
+            <h1 contenteditable="false" style="margin-bottom:20px;">User Accounts</h1>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
             <ul class="list-group">
               <li class="list-group-item list-group-item-success">
-                <h4 contenteditable="true" style="color:white;">Username</h4>
+                <h4 contenteditable="false" style="color:white;">Username</h4>
               </li>
               <li class="list-group-item">
                 <a href="#">Dapibus ac facilisis in</a>
