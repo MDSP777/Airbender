@@ -28,62 +28,64 @@
               </li>
             </ul>
             <form>
-              <input name="review" placeholder=" Write a review ... " id="review">
+              <input name="review" placeholder=" Write a review ... " id="review"><br>
+              <button type="submit" class="btn btn-success">Submit Review</button>
             </form>
             <div class="row">
               <div class="col-md-6"></div>
               <div class="col-md-1">
                 <h4 contenteditable="false" class="text-muted" id="quantity-txt">Quantity:&nbsp;</h4>
               </div>
-              <form class="quantity-input" action="purchase" method="post">
+              <form action="purchase" method="post">
+                  <input type="hidden" name="price" val="${product.price }" id="price"/>
+                  <input type="hidden" name="productId" val="${product.id }" id="productId"/>
 	              <div class="col-md-1">
-	                  <input type="number" class="quantity-input" name="quantity" id="quantity">
-	                  <input type="hidden" name="price" val="${product.price }">
+	                  <input type="number" class="quantity-input" name="quantity" id="quantity"/>
 	              </div>
 	              <div class="col-md-2 text-right">
 	                <h4 class="text-muted" contenteditable="false" id="total-price">Total: 0 php</h4>
 	              </div>
 	              <div class="col-md-2">
-	                <button type="button" class="btn btn-info btn-lg" id="purchase" data-toggle="modal" data-target="#purchaseModal">Purchase</button>
+	                <button type="button" class="btn btn-success btn-lg" id="purchase" data-toggle="modal" data-target="#purchaseModal">Purchase</button>
 	              </div>
 	              
 	              
 				  <div class="modal fade" id="purchaseModal" role="dialog">
-				    <div class="modal-dialog">
-				    
-				      <!-- Modal content-->
-				      <div class="modal-content">
-				        <div class="modal-header">
-				          <button type="button" class="close" data-dismiss="modal">&times;</button>
-				          <h4 class="modal-title">Confirm Purchase</h4>
-				        </div>
-				        <div class="modal-body">
-				          <p id="confirmMessage"></p><br>  
-		                  <label for="inputEmail3" class="control-label">Credit Card Number: &nbsp; </label>
-		                  <input type="text" class="text-input" name="creditcard" id="creditcard">
-				        </div>
-				        <div class="modal-footer">
-				          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-				          <button type="submit" class="btn btn-default" data-dismiss="modal">Confirm</button>
-				        </div>
-				      </div>
-				    <script>
-					    $('#purchase').click(function(){
-					        $('#confirmMessage').text('You are purchasing ' + $('#quantity').val() + ' ${product.name } for ' + parseFloat($('#quantity').val()) * parseFloat(${product.price }) + ' php')
-					   	});
-		
-					   $('#quantity').focusout(function(){
-						   total = parseFloat($('#quantity').val()) * parseFloat(${product.price });
-						   if(isNaN(total)) total = 0;
-					       $('#total-price').text('Total: ' + total + ' php');
-					   });
-				    
-				    </script>
-				     
-				    </div>
-			    </form>
-			  </div>
+					    <div class="modal-dialog">
+					    
+					      <!-- Modal content-->
+					      <div class="modal-content">
+					        <div class="modal-header">
+					          <button type="button" class="close" data-dismiss="modal">&times;</button>
+					          <h4 class="modal-title">Confirm Purchase</h4>
+					        </div>
+					        <div class="modal-body">
+					          <p id="confirmMessage"></p><br>  
+			                  <label for="inputEmail3" class="control-label">Credit Card Number: &nbsp; </label>
+			                  <input type="text" class="text-input" name="creditcard" id="creditcard">
+					        </div>
+					        <div class="modal-footer">
+					          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					          <input class="btn btn-default" type="submit"/>
+					        </div>
+					      </div>
+					    <script>
+						    $('#purchase').click(function(){
+						        $('#confirmMessage').text('You are purchasing ' + $('#quantity').val() + ' ${product.name } for ' + parseFloat($('#quantity').val()) * parseFloat(${product.price }) + ' php')
+						   	});
+			
+						   $('#quantity').focusout(function(){
+							   total = parseFloat($('#quantity').val()) * parseFloat(${product.price });
+							   if(isNaN(total)) total = 0;
+						       $('#total-price').text('Total: ' + total + ' php');
+						   });
+					    
+					    </script>
+					     
+					    </div>
+			  		</div>
 			  
+			    </form>
             </div>
           </div>
         </div>
