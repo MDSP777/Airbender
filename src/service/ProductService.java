@@ -59,7 +59,7 @@ public class ProductService extends JpaService {
 		try{
 			return entityManager.find(Product.class, id);
 		} finally {
-			closeTransaction();
+//			closeTransaction();
 		}
 	}
 }

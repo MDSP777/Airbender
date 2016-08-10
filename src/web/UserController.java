@@ -40,7 +40,6 @@ public class UserController {
 		request.getRequestDispatcher("WEB-INF/view/signup.jsp").forward(request, response);
 	}
 	
-	
 	@RequestMapping({"/login"})
 	public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		String username = request.getParameter("username");

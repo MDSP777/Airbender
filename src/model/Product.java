@@ -1,9 +1,14 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import exceptions.InvalidCategoryException;
 
@@ -21,6 +26,8 @@ public class Product {
 	private String description;
 	private String category;
 	private double price;
+	@OneToMany(mappedBy="product", cascade=CascadeType.ALL)
+	private Collection<Review> reviews;
 	
 	protected Product(){}
 
@@ -30,6 +37,8 @@ public class Product {
 		this.description = description;
 		this.category = category;
 		this.price = price;
+		
+		reviews = new ArrayList<Review>();
 	}
 
 	public int getId() {

@@ -30,8 +30,10 @@ public class AddUserTest {
 				"helloworld", billingAddress, shippingAddress);
 		userService.register(u);
 		
+		User pm = new User("Marc", "", "San Pedro", "MDSP777", "mdsp777@outlook.com", 
+				"helloworld", billingAddress, shippingAddress);
+		
 		String hash = userService.getHashFor("MDSP777");
 		Assert.assertTrue(BCrypt.checkpw("helloworld", hash));
-
 	}
 }

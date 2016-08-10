@@ -20,6 +20,11 @@ import service.PurchaseService;
 @Entity
 @Component
 public class User {
+	public static String REGULAR = "regular";
+	public static String PRODUCT_MANAGER = "PM";
+	public static String ACCOUNTING_MANAGER = "AM";
+	public static String ADMIN = "admin";
+	
 	private String firstName;
 	private String middleName;
 	private String lastName;
@@ -34,6 +39,7 @@ public class User {
 	private Address shippingAddress;
 	@ElementCollection
 	private Collection<Integer> purchasedProducts;
+	private String userType;
 	
 	@Transient
 	private static PurchaseService oService;
@@ -53,6 +59,7 @@ public class User {
 		this.password = BCrypt.hashpw(pw, salt);
 		this.billingAddress = billingAddress;
 		this.shippingAddress = shippingAddress;
+		this.userType = User.REGULAR;
 		
 		purchasedProducts = new HashSet<Integer>();
 	}
@@ -104,6 +111,21 @@ public class User {
 	
 	public boolean hasPurchased(Product p){
 		return purchasedProducts.contains(p.getId());
+	}
+	
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		if(valid(userType)) this.userType = userType;
+	}
+	
+	private boolean valid(String type) {
+		return type.equals(REGULAR) ||
+				type.equals(PRODUCT_MANAGER) ||
+				type.equals(ACCOUNTING_MANAGER) ||
+				type.equals(ADMIN);
 	}
 
 	@Override
