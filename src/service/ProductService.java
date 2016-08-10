@@ -54,7 +54,6 @@ public class ProductService extends JpaService {
 		}
 	}
 	
-<<<<<<< HEAD
 	public Product getProduct(int id)
 	{
 		openTransaction();
@@ -80,7 +79,6 @@ public class ProductService extends JpaService {
 	}
 	
 	
-=======
 	public Product findBy(int id) {
 		openTransaction();
 		try{
@@ -89,5 +87,4 @@ public class ProductService extends JpaService {
 			closeTransaction();
 		}
 	}
->>>>>>> origin/master
 }

@@ -40,7 +40,6 @@ public class UserController {
 		request.getRequestDispatcher("WEB-INF/view/signup.jsp").forward(request, response);
 	}
 	
-<<<<<<< HEAD
 	@RequestMapping({"/product"})
 	public void viewProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		request.getRequestDispatcher("WEB-INF/view/product.jsp").forward(request, response);
@@ -84,8 +83,6 @@ public class UserController {
 	public void goToHomepage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		request.getRequestDispatcher("WEB-INF/view/hello.jsp").forward(request, response);
 	}
-=======
->>>>>>> origin/master
 	
 	@RequestMapping({"/login"})
 	public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
