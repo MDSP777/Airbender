@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,6 +27,8 @@ public class User {
 	@OneToOne(cascade=CascadeType.ALL)
 	private Address shippingAddress;
 	
+	private Collection<Integer> purchasedProducts;
+	
 	protected User(){}
 	
 	public User(String firstName, String middleName, String lastName, 
@@ -39,6 +44,8 @@ public class User {
 		this.password = BCrypt.hashpw(pw, salt);
 		this.billingAddress = billingAddress;
 		this.shippingAddress = shippingAddress;
+		
+		purchasedProducts = new ArrayList<Integer>();
 	}
 
 	public String getUsername() {

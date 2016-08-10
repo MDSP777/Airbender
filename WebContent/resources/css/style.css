@@ -164,3 +164,22 @@ div#signup h1
 {
 	height: 400px;
 }
+
+/*product*/
+.quantity-input
+{
+	margin-top: 5px;
+  	width: 50px !important;
+}
+#quantity-txt
+{
+	margin-left: 10px;
+    width: 100px;
+}
+
+#review
+{
+ 	height: 60px;
+    width: 1140px;
+  	margin-bottom:20px;
+}

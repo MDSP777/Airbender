@@ -53,6 +53,6 @@ public class PageController {
 	public void goToItem(@RequestParam int id, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		Product p = pService.findBy(id);
 		request.setAttribute("product", p);
-		request.getRequestDispatcher("WEB-INF/view/item.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/product.jsp").forward(request, response);
 	}
 }
