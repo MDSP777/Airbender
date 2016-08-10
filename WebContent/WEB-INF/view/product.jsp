@@ -41,7 +41,7 @@
                   <input type="hidden" name="price" val="69.00">
               </div>
               <div class="col-md-2 text-right">
-                <h4 class="text-muted" contenteditable="false" id="total-price">Total: 69.00 php</h4>
+                <h4 class="text-muted" contenteditable="false" id="total-price">Total: 0 php</h4>
               </div>
               <div class="col-md-2">
                 <button type="button" class="btn btn-info btn-lg" id="purchase" data-toggle="modal" data-target="#purchaseModal">Purchase</button>
@@ -58,7 +58,9 @@
 			          <h4 class="modal-title">Confirm Purchase</h4>
 			        </div>
 			        <div class="modal-body">
-			          <p id="confirmMessage"></p>
+			          <p id="confirmMessage"></p><br>  
+	                  <label for="inputEmail3" class="control-label">Credit Card Number: &nbsp; </label>
+	                  <input type="text" class="text-input" name="creditcard" id="creditcard">
 			        </div>
 			        <div class="modal-footer">
 			          <button type="submit" class="btn btn-default" data-dismiss="modal">Confirm</button>
@@ -68,11 +70,11 @@
 			    </form>
 			    <script>
 				    $('#purchase').click(function(){
-				        $('#confirmMessage').text('You are purchasing ' + $('#quantity').val() + ' Shoes 1 for ' + parseFloat($('#quantity').val()) * parseFloat($('#price').val())+ ' php')
+				        $('#confirmMessage').text('You are purchasing ' + $('#quantity').val() + ' Shoes 1 for ' + parseFloat($('#quantity').val()) * ${product.price}+ ' php')
 				   	})
 	
 				   $('#quantity').click(function(){
-				        $('#total-price').text('Total Price: ' + (number($('#quantity').val()) * number($('#price').val())))
+				        $('#total-price').text('Total Price: ' + parseFloat($('#quantity').val()) * ${product.price} + ' php')
 				   })
 			    
 			    </script>
