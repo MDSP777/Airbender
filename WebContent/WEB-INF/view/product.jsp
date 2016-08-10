@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <jsp:include page="header.jsp"/>
 	<script src="<c:url value="/resources/js/confirmPurchase.js" />" type="text/javascript"></script>
@@ -34,52 +35,53 @@
               <div class="col-md-1">
                 <h4 contenteditable="false" class="text-muted" id="quantity-txt">Quantity:&nbsp;</h4>
               </div>
-              <div class="col-md-1">
-                
-              <form class="quantity-input">
-                  <input type="number" class="quantity-input" name="quantity" id="quantity">
-                  <input type="hidden" name="price" val="69.00">
-              </div>
-              <div class="col-md-2 text-right">
-                <h4 class="text-muted" contenteditable="false" id="total-price">Total Price: 0 php</h4>
-              </div>
-              <div class="col-md-2">
-                <button type="button" class="btn btn-info btn-lg" id="purchase" data-toggle="modal" data-target="#purchaseModal">Purchase</button>
-              </div>
-              
-              
-			  <div class="modal fade" id="purchaseModal" role="dialog">
-			    <div class="modal-dialog">
-			    
-			      <!-- Modal content-->
-			      <div class="modal-content">
-			        <div class="modal-header">
-			          <button type="button" class="close" data-dismiss="modal">&times;</button>
-			          <h4 class="modal-title">Confirm Purchase</h4>
-			        </div>
-			        <div class="modal-body">
-			          <p id="confirmMessage"></p>
-			        </div>
-			        <div class="modal-footer">
-			          <button type="submit" class="btn btn-default" data-dismiss="modal">Confirm</button>
-			          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-			        </div>
-			      </div>
+              <form class="quantity-input" action="purchase" method="post">
+	              <div class="col-md-1">
+	                  <input type="number" class="quantity-input" name="quantity" id="quantity">
+	                  <input type="hidden" name="price" val="${product.price }">
+	              </div>
+	              <div class="col-md-2 text-right">
+	                <h4 class="text-muted" contenteditable="false" id="total-price">Total: 0 php</h4>
+	              </div>
+	              <div class="col-md-2">
+	                <button type="button" class="btn btn-info btn-lg" id="purchase" data-toggle="modal" data-target="#purchaseModal">Purchase</button>
+	              </div>
+	              
+	              
+				  <div class="modal fade" id="purchaseModal" role="dialog">
+				    <div class="modal-dialog">
+				    
+				      <!-- Modal content-->
+				      <div class="modal-content">
+				        <div class="modal-header">
+				          <button type="button" class="close" data-dismiss="modal">&times;</button>
+				          <h4 class="modal-title">Confirm Purchase</h4>
+				        </div>
+				        <div class="modal-body">
+				          <p id="confirmMessage"></p><br>  
+		                  <label for="inputEmail3" class="control-label">Credit Card Number: &nbsp; </label>
+		                  <input type="text" class="text-input" name="creditcard" id="creditcard">
+				        </div>
+				        <div class="modal-footer">
+				          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				          <button type="submit" class="btn btn-default" data-dismiss="modal">Confirm</button>
+				        </div>
+				      </div>
+				    <script>
+					    $('#purchase').click(function(){
+					        $('#confirmMessage').text('You are purchasing ' + $('#quantity').val() + ' ${product.name } for ' + parseFloat($('#quantity').val()) * parseFloat(${product.price }) + ' php')
+					   	});
+		
+					   $('#quantity').focusout(function(){
+						   total = parseFloat($('#quantity').val()) * parseFloat(${product.price });
+						   if(isNaN(total)) total = 0;
+					       $('#total-price').text('Total: ' + total + ' php');
+					   });
+				    
+				    </script>
+				     
+				    </div>
 			    </form>
-			    <script>
-				    $('#purchase').click(function(){
-				        $('#confirmMessage').text('You are purchasing ' + $('#quantity').val() + ' ${product.name } for ' + parseFloat($('#quantity').val()) * parseFloat(${product.price }) + ' php')
-				   	});
-	
-				   $('#quantity').focusout(function(){
-					   total = parseFloat($('#quantity').val()) * parseFloat(${product.price });
-					   if(isNaN(total)) total = 0;
-				       $('#total-price').text('Total Price: ' + total + ' php');
-				   });
-			    
-			    </script>
-			     
-			    </div>
 			  </div>
 			  
             </div>

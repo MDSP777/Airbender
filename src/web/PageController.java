@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Product;
+import model.Purchase;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -60,6 +61,7 @@ public class PageController {
 			
 		}
 	}
+	
 	
 	@RequestMapping({"/editproduct"})
 	public void editProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	

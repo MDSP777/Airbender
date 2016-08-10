@@ -131,7 +131,16 @@ public class UserController {
 		}	
 		
 	}
-	
+
+	@RequestMapping({"/purchase"})
+	public void purchase(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		Product p = (Product) request.getAttribute("product");
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		String creditCard = request.getParameter("creditcard");
+		user.order(p, quantity, creditCard);
+		uService.update(user);
+		response.sendRedirect("/");
+	}
 
 //	@RequestMapping({"/testshit"})
 //	public void goToTESTSHIT(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	

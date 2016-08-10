@@ -103,8 +103,8 @@ public class User {
 		return lastName;
 	}
 	
-	public void order(Product p, int quantity){
-		Purchase o = new Purchase(this, p, quantity);
+	public void order(Product p, int quantity, String creditCard){
+		Purchase o = new Purchase(this, p, quantity, creditCard);
 		oService.addPurchase(o);
 		purchasedProducts.add(p.getId());
 	}

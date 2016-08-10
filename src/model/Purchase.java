@@ -21,14 +21,16 @@ public class Purchase {
 	private Product product;
 	private int quantity;
 	private double totalPrice;
+	private String creditCard;
 	
 	protected Purchase(){}
 	
-	public Purchase(User user, Product product, int quantity) {
+	public Purchase(User user, Product product, int quantity, String creditCard) {
 		super();
 		this.user = user;
 		this.product = product;
 		this.quantity = quantity;
+		this.creditCard = creditCard;
 		this.totalPrice = product.getPrice()*this.quantity;
 	}
 
@@ -50,6 +52,10 @@ public class Purchase {
 
 	public double getTotalPrice() {
 		return totalPrice;
+	}
+	
+	public String getCreditCard(){
+		return creditCard;
 	}
 
 	@Override

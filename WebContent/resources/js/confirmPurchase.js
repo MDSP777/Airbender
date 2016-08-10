@@ -1,5 +1,5 @@
 $('#purchase').click(function(){
-     $('#confirmMessage').text('You are purchasing ' + $('#quantity').val() + ' Shoes 1 for ' + number($('#quantity').val()) * number($('#price').val())+ ' php')
+     $('#confirmMessage').text('You are purchasing ' + $('#quantity').val() + ' Shoes 1 for ' + number($('#quantity').val()) * number($('#price').val())+ ' php.')
 })
 
 $('#quantity').keyup(function(){
