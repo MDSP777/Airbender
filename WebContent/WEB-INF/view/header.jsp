@@ -51,16 +51,19 @@
 			  		<a>Hi, ${user.firstName }!</a>
 			  	</li>
 			  	
+			<c:if test="${user.userType == 'PM'}">
 				<li>
 					<a href="categories?type=productManager" id="pm-button">Manage Products</a>
 				</li>
 			</c:if>
 			
+			<c:if test="${user.userType == 'admin'}">
 				<li>
 					<a href="ad" id="ad-button">Manage Accounts</a>
 				</li>
 			</c:if>
 			
+			<c:if test="${user.userType == 'AM'}">
 				<li>
 					<a href="view_sales_reports?total" id="am-button">View Sales Reports</a>
 				</li>
