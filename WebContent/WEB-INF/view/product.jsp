@@ -32,7 +32,7 @@
             <div class="row">
               <div class="col-md-6"></div>
               <div class="col-md-1">
-                <h4 contenteditable="true" class="text-muted" id="quantity-txt">Quantity:&nbsp;</h4>
+                <h4 contenteditable="false" class="text-muted" id="quantity-txt">Quantity:&nbsp;</h4>
               </div>
               <div class="col-md-1">
                 
