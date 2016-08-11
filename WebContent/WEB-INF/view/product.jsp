@@ -30,7 +30,7 @@
             </ul>
             <form action="review" method="post">
               <input type="hidden" name="productId" value="${product.id }" />
-              <input name="review" placeholder=" Write a review ... " ><br>
+              <input name="review" placeholder=" Write a review ... " id="review"><br>
               <button type="submit" class="btn btn-success">Submit Review</button>
             </form>
             <div class="row">
