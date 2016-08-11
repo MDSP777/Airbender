@@ -22,12 +22,12 @@
               <tbody>
                 <c:forEach var="product" items="${products }">
 	                <tr>
-	                  <td>${product.name }</td>
+	                  <td><a href="product">${product.name }</a></td>
 	                  <td>${product.description }</td>
 	                  <td>P${product.price }</td>
 	                  <td>
 	                  	<div style="">
-                			<a href="editproduct?id=${product.id }"><i class="fa fa-2x fa-edit fa-fw pull-right text-success"></i></a>
+                			<a href="editproduct"><i class="fa fa-2x fa-edit fa-fw pull-right text-success"></i></a>
               			</div></td>
 	                </tr>
                 </c:forEach>
