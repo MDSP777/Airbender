@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import exceptions.InvalidCategoryException;
 import exceptions.UsernameOrEmailAlreadyTakenException;
+
 import service.ProductService;
 import service.PurchaseService;
 import service.UserService;
@@ -52,7 +53,7 @@ public class UserController {
 	}
 
 	@RequestMapping({"/pm"})
-	public void productManager(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+	public void productManager(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Collection<Product> products = pService.getAllProducts();
 		request.setAttribute("products", products);
 		request.getRequestDispatcher("WEB-INF/view/categoryPM.jsp").forward(request, response);
@@ -73,7 +74,7 @@ public class UserController {
 		String desc = request.getParameter("productDescription");
 		double price = Double.parseDouble(request.getParameter("productPrice"));
 		String category = request.getParameter("productCategory");
-
+	
 		Product p = pService.findBy(id);
 		p.setName(name);
 		p.setDescription(desc);
@@ -82,10 +83,10 @@ public class UserController {
 		pService.updateProduct(p);
 		response.sendRedirect("pm");
 	}
-	
+
 	@RequestMapping({"/addproduct"})
 	public void addProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		request.setAttribute("headerName", "Add");
+		request.setAttribute("headerName", "Add");	
 		request.getRequestDispatcher("WEB-INF/view/productManager.jsp").forward(request, response);
 	}
 	
@@ -107,6 +108,7 @@ public class UserController {
 		response.sendRedirect("pm");
 	}
 	
+	
 	@RequestMapping({"/view_sales_reports"})
 	public void accountingManager(@RequestParam String type, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		request.setAttribute("type", type);
@@ -119,7 +121,7 @@ public class UserController {
 		} else if(Purchase.PRODUCT.equals(type)){
 			results = oService.getTotalSalesById();
 		} else {
-			response.sendRedirect("");
+			response.sendRedirect("home");
 		}
 		request.setAttribute("sales", results);
 		request.getRequestDispatcher("WEB-INF/view/financialManager.jsp").forward(request, response);
@@ -161,7 +163,7 @@ public class UserController {
 			request.getSession().invalidate();
 		}
         response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-		response.setHeader("Location", "https://localhost:8443/SECURDE/");
+		response.setHeader("Location", "https://localhost:8443/Airbender/");
 //		response.sendRedirect("");
 	}
 	
@@ -194,11 +196,16 @@ public class UserController {
 		Address shippingAddress = new Address(shipHouseNum, shipStreet, shipSubd, shipCity, shipPostal, shipCountry);
 		
 		try {
+			uService.validate(email, username);
 			User u = new User(fName, mName, lName, username, email, pw, billingAddress, shippingAddress);
 			uService.register(u);
 			response.sendRedirect("home");
 		} catch (UsernameOrEmailAlreadyTakenException e){
-			e.printStackTrace();
+			//e.printStackTrace();
+			String errorMsg = "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Username or Email is already taken.";
+			request.setAttribute("errorMsg", errorMsg);
+			request.getRequestDispatcher("WEB-INF/view/signup.jsp").forward(request, response);
+			
 		}	
 		
 	}
