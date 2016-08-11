@@ -11,14 +11,14 @@ import exceptions.UsernameOrEmailAlreadyTakenException;
 
 @Repository
 public class UserService extends JpaService {
-	public void register(User u) throws UsernameOrEmailAlreadyTakenException {
+	public void register(User u) throws UsernameOrEmailAlreadyTakenException{
 		openTransaction();
 		try{
 			validate(u.getEmail(), u.getUsername());
 			entityManager.persist(u);
 			System.out.println("Added User: "+u);
 		} finally {
-//			closeTransaction();
+			//closeTransaction();
 		}
 	}
 	
@@ -62,6 +62,5 @@ public class UserService extends JpaService {
 		if(!q.getResultList().isEmpty()){
 			throw new UsernameOrEmailAlreadyTakenException("Username or email already taken.");
 		}
-	
 	}
 }

@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-sm-10">
                   <input type="text" class="form-control" id="inputEmail3" placeholder="Username"
-                  name="username">
+                  name="username" required>
                 </div>
               </div>
               <div class="form-group">
@@ -31,7 +31,7 @@
                 </div>
                 <div class="col-sm-10">
                   <input type="email" class="form-control" id="inputEmail3" placeholder="Email"
-                  name="email">
+                  name="email" required>
                 </div>
               </div>
               <div class="form-group" id="divrp">
@@ -40,7 +40,7 @@
                 </div>
                 <div class="col-sm-10">
                   <input type="password" class="form-control" id="rpassword" placeholder="Password"
-                  name="password">
+                  name="password" required>
                 </div>
               </div>
               <div class="form-group" id="divrcp">
@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-sm-10">
                   <input type="password" class="form-control" id="rcpassword" placeholder="Password"
-                  name="confirmpassword">
+                  name="confirmpassword" required>
                   <div id="divCheckPasswordMatch"></div>
               </div>
               </div>
@@ -60,7 +60,7 @@
                   <label for="inputEmail3" class="control-label">First Name</label>
                 </div>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" placeholder="First Name" name="fname">
+                  <input type="text" class="form-control" placeholder="First Name" name="fname" required>
                 </div>
               </div>
               <div class="form-group">
@@ -76,7 +76,7 @@
                   <label for="inputEmail3" class="control-label">Last Name</label>
                 </div>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" placeholder="Last Name" name="lname">
+                  <input type="text" class="form-control" placeholder="Last Name" name="lname" required>
                 </div>
               </div>
               <h4>&nbsp;</h4>
@@ -86,7 +86,7 @@
                   <label class="control-label">House Number</label>
                 </div>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" placeholder="House Number" name="billHouseNum">
+                  <input type="text" class="form-control" placeholder="House Number" name="billHouseNum" required>
                 </div>
               </div>
               <div class="form-group">
@@ -94,7 +94,7 @@
                   <label class="control-label">Street</label>
                 </div>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" placeholder="Street" name="billStreet">
+                  <input type="text" class="form-control" placeholder="Street" name="billStreet" required>
                 </div>
               </div>
               <div class="form-group">
@@ -102,7 +102,7 @@
                   <label class="control-label">Subdivision</label>
                 </div>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" placeholder="Subdivision" name="billSubd">
+                  <input type="text" class="form-control" placeholder="Subdivision" name="billSubd" required>
                 </div>
               </div>
               <div class="form-group">
@@ -110,7 +110,7 @@
                   <label class="control-label">City</label>
                 </div>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" placeholder="City" name="billCity">
+                  <input type="text" class="form-control" placeholder="City" name="billCity" required>
                 </div>
               </div>
               <div class="form-group">
@@ -118,7 +118,7 @@
                   <label class="control-label">Postal Code</label>
                 </div>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" placeholder="Postal Code" name="billPostal">
+                  <input type="text" class="form-control" placeholder="Postal Code" name="billPostal" required>
                 </div>
               </div>
               <div class="form-group">
@@ -126,7 +126,7 @@
                   <label class="control-label">Country</label>
                 </div>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" placeholder="Country" name="billCountry">
+                  <input type="text" class="form-control" placeholder="Country" name="billCountry" required>
                 </div>
               </div>
               <h4>&nbsp;</h4>
@@ -136,7 +136,7 @@
                   <label class="control-label">House Number</label>
                 </div>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" placeholder="House Number" name="shipHouseNum">
+                  <input type="text" class="form-control" placeholder="House Number" name="shipHouseNum" required>
                 </div>
               </div>
               <div class="form-group">
@@ -144,7 +144,7 @@
                   <label class="control-label">Street</label>
                 </div>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" placeholder="Street" name="shipStreet">
+                  <input type="text" class="form-control" placeholder="Street" name="shipStreet" required>
                 </div>
               </div>
               <div class="form-group">
@@ -152,7 +152,7 @@
                   <label class="control-label">Subdivision</label>
                 </div>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" placeholder="Subdivision" name="shipSubd">
+                  <input type="text" class="form-control" placeholder="Subdivision" name="shipSubd" required>
                 </div>
               </div>
               <div class="form-group">
@@ -160,7 +160,7 @@
                   <label class="control-label">City</label>
                 </div>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" placeholder="City" name="shipCity">
+                  <input type="text" class="form-control" placeholder="City" name="shipCity" required>
                 </div>
               </div>
               <div class="form-group">
@@ -168,7 +168,7 @@
                   <label class="control-label">Postal Code</label>
                 </div>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" placeholder="Postal Code" name="shipPostal">
+                  <input type="text" class="form-control" placeholder="Postal Code" name="shipPostal" required>
                 </div>
               </div>
               <div class="form-group">
@@ -176,7 +176,7 @@
                   <label class="control-label">Country</label>
                 </div>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" placeholder="Country" name="shipCountry">
+                  <input type="text" class="form-control" placeholder="Country" name="shipCountry" required>
                 </div>
               </div>
               

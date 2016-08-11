@@ -146,11 +146,16 @@ public class User {
 				+ ", shippingAddress=" + shippingAddress + "]";
 	}
 
-	public void review(Product p, String content){
+	public boolean review(Product p, String content){
 		if(purchasedProducts.contains(p.getId())){
 			Review r = new Review(p, this, content);
 			p.addReview(r);
 			pService.updateProduct(p);
-		} 
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }
