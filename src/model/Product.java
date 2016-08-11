@@ -53,7 +53,7 @@ public class Product {
 		return description;
 	}
 	
-	public String getCatrgory() {
+	public String getCategory() {
 		return category;
 	}
 

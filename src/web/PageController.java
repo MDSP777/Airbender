@@ -61,17 +61,6 @@ public class PageController {
 			
 		}
 	}
-	
-	
-	@RequestMapping({"/editproduct"})
-	public void editProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		request.getRequestDispatcher("WEB-INF/view/productManager.jsp").forward(request, response);
-	}
-	
-	@RequestMapping({"/addproduct"})
-	public void addProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		request.getRequestDispatcher("WEB-INF/view/productManager.jsp").forward(request, response);
-	}
 
 	@RequestMapping({"/hello"})
 	public void goToHomepage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	

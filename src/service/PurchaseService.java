@@ -30,7 +30,9 @@ public class PurchaseService extends JpaService {
 		try{
 			TypedQuery<Double> query = 
 					entityManager.createQuery("SELECT sum(o.totalPrice) FROM Purchase o", Double.class);
-			return query.getResultList().get(0);
+			double res = query.getResultList().get(0);
+//			if(res==null) res = 0;
+			return res;
 		} finally {
 			closeTransaction();
 		}

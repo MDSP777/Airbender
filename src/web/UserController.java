@@ -28,8 +28,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import exceptions.InvalidCategoryException;
 import exceptions.UsernameOrEmailAlreadyTakenException;
-
 import service.ProductService;
 import service.PurchaseService;
 import service.UserService;
@@ -53,7 +53,58 @@ public class UserController {
 
 	@RequestMapping({"/pm"})
 	public void productManager(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		Collection<Product> products = pService.getAllProducts();
+		request.setAttribute("products", products);
+		request.getRequestDispatcher("WEB-INF/view/categoryPM.jsp").forward(request, response);
+	}
+	
+	@RequestMapping({"/editproduct"})
+	public void editProduct(@RequestParam int id, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		Product p = pService.findBy(id);
+		request.setAttribute("headerName", "Edit");
+		request.setAttribute("product", p);
 		request.getRequestDispatcher("WEB-INF/view/productManager.jsp").forward(request, response);
+	}
+	
+	@RequestMapping({"/edit_product"})
+	public void saveCurrentProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, InvalidCategoryException {	
+		int id = Integer.parseInt(request.getParameter("productId"));
+		String name = request.getParameter("productName");
+		String desc = request.getParameter("productDescription");
+		double price = Double.parseDouble(request.getParameter("productPrice"));
+		String category = request.getParameter("productCategory");
+
+		Product p = pService.findBy(id);
+		p.setName(name);
+		p.setDescription(desc);
+		p.setPrice(price);
+		p.setCategory(category.toLowerCase());
+		pService.updateProduct(p);
+		response.sendRedirect("pm");
+	}
+	
+	@RequestMapping({"/addproduct"})
+	public void addProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		request.setAttribute("headerName", "Add");
+		request.getRequestDispatcher("WEB-INF/view/productManager.jsp").forward(request, response);
+	}
+	
+	@RequestMapping({"/add_product"})
+	public void saveNewProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		String name = request.getParameter("productName");
+		String desc = request.getParameter("productDescription");
+		double price = Double.parseDouble(request.getParameter("productPrice"));
+		String category = request.getParameter("productCategory");
+
+		Product p = new Product(name, desc, category, price);
+		pService.addProduct(p);
+		response.sendRedirect("pm");
+	}
+	
+	@RequestMapping({"/delete"})
+	public void saveNewProduct(@RequestParam int id, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		pService.deleteProduct(pService.findBy(id));
+		response.sendRedirect("pm");
 	}
 	
 	@RequestMapping({"/view_sales_reports"})
@@ -68,7 +119,7 @@ public class UserController {
 		} else if(Purchase.PRODUCT.equals(type)){
 			results = oService.getTotalSalesById();
 		} else {
-			
+			response.sendRedirect("");
 		}
 		request.setAttribute("sales", results);
 		request.getRequestDispatcher("WEB-INF/view/financialManager.jsp").forward(request, response);
@@ -110,7 +161,7 @@ public class UserController {
 			request.getSession().invalidate();
 		}
         response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-		response.setHeader("Location", "https://localhost:8443/Airbender/");
+		response.setHeader("Location", "https://localhost:8443/SECURDE/");
 //		response.sendRedirect("");
 	}
 	
@@ -143,7 +194,6 @@ public class UserController {
 		Address shippingAddress = new Address(shipHouseNum, shipStreet, shipSubd, shipCity, shipPostal, shipCountry);
 		
 		try {
-			uService.validate(email, username);
 			User u = new User(fName, mName, lName, username, email, pw, billingAddress, shippingAddress);
 			uService.register(u);
 			response.sendRedirect("home");
