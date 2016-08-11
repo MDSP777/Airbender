@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;
 
+import service.ProductService;
 import service.PurchaseService;
 
 @Entity
@@ -40,9 +41,11 @@ public class User {
 	@ElementCollection
 	private Collection<Integer> purchasedProducts;
 	private String userType;
-	
+
 	@Transient
 	private static PurchaseService oService;
+	@Transient
+	private static ProductService pService;
 	
 	protected User(){}
 	
@@ -67,12 +70,18 @@ public class User {
 	@PostConstruct
 	public void init() {
 	    System.out.println("Initializing PurchaseService as [" +
-	                oService + "]");
+	                oService + "]"
+	               + ", ProductService as [" + pService + "]");
 	}
 	
 	@Autowired
 	public void setPurchaseService(PurchaseService oService) {
-	    this.oService = oService;
+	    User.oService = oService;
+	}
+	
+	@Autowired
+	public void setProductService(ProductService pService) {
+	    User.pService = pService;
 	}
 	
 	public String getUsername() {
@@ -137,5 +146,11 @@ public class User {
 				+ ", shippingAddress=" + shippingAddress + "]";
 	}
 
-	
+	public void review(Product p, String content){
+		if(purchasedProducts.contains(p.getId())){
+			Review r = new Review(p, this, content);
+			p.addReview(r);
+			pService.updateProduct(p);
+		} 
+	}
 }

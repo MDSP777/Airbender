@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.Address;
 import model.Purchase;
 import model.Product;
+import model.Review;
 import model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -134,28 +135,19 @@ public class UserController {
 
 	@RequestMapping({"/purchase"})
 	public void purchase(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-//		Product p = pService.findBy(Integer.parseInt(request.getParameter("productId")));
-//		int quantity = Integer.parseInt(request.getParameter("quantity"));
-//		String creditCard = request.getParameter("creditcard");
-//		user.order(p, quantity, creditCard);
-//		uService.update(user);
-//		response.sendRedirect("/");
-		System.out.println("HI "+request.getParameter("productId"));
-		System.out.println("HI "+request.getParameter("price"));
-		System.out.println("HI "+request.getParameter("quantity"));
-		System.out.println("HI "+request.getParameter("creditcard"));
+		Product p = pService.findBy(Integer.parseInt(request.getParameter("productId")));
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		String creditCard = request.getParameter("creditcard");
+		user.order(p, quantity, creditCard);
+		uService.update(user);
+		response.sendRedirect("");
 	}
 
-//	@RequestMapping({"/testshit"})
-//	public void goToTESTSHIT(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-//		if(user!=null){
-//			System.out.println("HI");
-//			user.order(pService.findBy(2), 2);
-//			user.order(pService.findBy(4), 2);
-//			user.order(pService.findBy(6), 2);
-//			user.order(pService.findBy(8), 2);
-//			uService.update(user);
-//			
-//		}
-//	}
+	@RequestMapping({"/review"})
+	public void review(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		int id = Integer.parseInt(request.getParameter("productId"));
+		String content = request.getParameter("review");
+		user.review(pService.findBy(id), content);
+		response.sendRedirect("");
+	}
 }

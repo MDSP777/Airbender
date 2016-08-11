@@ -88,5 +88,13 @@ public class Product {
 				type.equals(SLIPPERS);
 	}
 
+	public void addReview(Review r){
+		reviews.add(r);
+	}
+
+	public Collection<Review> getReviews() {
+		return reviews;
+	}
+	
 	
 }

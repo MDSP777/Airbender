@@ -22,13 +22,16 @@
             <p class="lead">${product.description }</p>
             <h3>Reviews</h3>
             <ul class="list-group">
-              <li class="list-group-item">
-                <h4>User 1</h4>Item is shit, don't buy
-<!--                 <span class="badge">5/5</span> -->
-              </li>
+              <c:forEach var="review" items="${product.reviews }">
+	              <li class="list-group-item">
+	                <h4>${review.username }</h4>${review.content }
+	<!--                 <span class="badge">5/5</span> -->
+	              </li>
+              </c:forEach>
             </ul>
-            <form>
-              <input name="review" placeholder=" Write a review ... " id="review"><br>
+            <form action="review" method="post">
+              <input type="hidden" name="productId" value="${product.id }" />
+              <input name="review" placeholder=" Write a review ... " ><br>
               <button type="submit" class="btn btn-success">Submit Review</button>
             </form>
             <div class="row">
@@ -37,8 +40,6 @@
                 <h4 contenteditable="false" class="text-muted" id="quantity-txt">Quantity:&nbsp;</h4>
               </div>
               <form action="purchase" method="post">
-                  <input type="hidden" name="price" val="${product.price }" id="price"/>
-                  <input type="hidden" name="productId" val="${product.id }" id="productId"/>
 	              <div class="col-md-1">
 	                  <input type="number" class="quantity-input" name="quantity" id="quantity"/>
 	              </div>
@@ -62,7 +63,9 @@
 					        <div class="modal-body">
 					          <p id="confirmMessage"></p><br>  
 			                  <label for="inputEmail3" class="control-label">Credit Card Number: &nbsp; </label>
-			                  <input type="text" class="text-input" name="creditcard" id="creditcard">
+			                  <input type="hidden" name="price" value="${product.price }" id="price"/>
+			                  <input type="hidden" name="productId" value="${product.id }" id="productId"/>
+			                  <input type="text" class="text-input" name="creditcard" id="creditcard"/>
 					        </div>
 					        <div class="modal-footer">
 					          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>

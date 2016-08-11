@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -24,6 +25,39 @@ public class Review {
 	private User user;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date datePosted;
+	private String content;
 	
 	protected Review(){}
+
+	public Review(Product product, User user, String content) {
+		super();
+		this.product = product;
+		this.user = user;
+		this.content = content;
+		this.datePosted = Calendar.getInstance().getTime();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public Date getDatePosted() {
+		return datePosted;
+	}
+
+	public String getContent() {
+		return content;
+	}
+	
+	public String getUsername(){
+		return user.getUsername();
+	}
 }
