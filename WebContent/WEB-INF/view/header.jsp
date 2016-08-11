@@ -98,8 +98,8 @@
 	
 	
 	<c:if test="${not empty errorMsg}">
-		<div class="container" id="errorMsg">
-          	<div class="alert alert-warning fade in">
+		<div class="container" id="errorMsgs">
+          	<div class="alert alert-warning fade in" style="margin-top:20px;">
 				${errorMsg }	
 			</div>
 	  </div>
