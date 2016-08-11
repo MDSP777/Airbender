@@ -33,14 +33,17 @@ public class AddUserTest {
 		
 		User pm = new User("Marc", "", "San Pedro", "pm", "pm@outlook.com", 
 				"pm", billingAddress, shippingAddress);
+		pm.setUserType(User.PRODUCT_MANAGER);
 		userService.register(pm);
 		
 		User am = new User("Marc", "", "San Pedro", "am", "am@outlook.com", 
 				"am", billingAddress, shippingAddress);
+		am.setUserType(User.ACCOUNTING_MANAGER);
 		userService.register(am);
 		
 		User ad = new User("Marc", "", "San Pedro", "ad", "ad@outlook.com", 
 				"ad", billingAddress, shippingAddress);
+		ad.setUserType(User.ADMIN);
 		userService.register(ad);
 		
 		String hash = userService.getHashFor("MDSP777");

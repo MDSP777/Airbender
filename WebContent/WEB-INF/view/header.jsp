@@ -53,7 +53,7 @@
 			  	
 			<c:if test="${user.userType == 'PM'}">
 				<li>
-					<a href="categories?type=productManager" id="pm-button">Manage Products</a>
+					<a href="pm" id="pm-button">Manage Products</a>
 				</li>
 			</c:if>
 			
@@ -65,7 +65,7 @@
 			
 			<c:if test="${user.userType == 'AM'}">
 				<li>
-					<a href="view_sales_reports?total" id="am-button">View Sales Reports</a>
+					<a href="view_sales_reports?type=total" id="am-button">View Sales Reports</a>
 				</li>
 			</c:if>
 			  	

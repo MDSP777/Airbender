@@ -186,7 +186,7 @@
                   <label class="control-label">Role</label>
                 </div>
                 <div class="col-sm-10">
-                  <select class="form-control">
+                  <select class="form-control" name="userCategory">
                     <option>Product Manager</option>
                     <option>Accounting Manager</option>
                   </select>

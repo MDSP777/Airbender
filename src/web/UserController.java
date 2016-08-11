@@ -163,7 +163,7 @@ public class UserController {
 			request.getSession().invalidate();
 		}
         response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-		response.setHeader("Location", "https://localhost:8443/Airbender/");
+		response.setHeader("Location", "https://localhost:8443/SECURDE/");
 //		response.sendRedirect("");
 	}
 	
@@ -198,6 +198,56 @@ public class UserController {
 		try {
 			uService.validate(email, username);
 			User u = new User(fName, mName, lName, username, email, pw, billingAddress, shippingAddress);
+			uService.register(u);
+			response.sendRedirect("home");
+		} catch (UsernameOrEmailAlreadyTakenException e){
+			//e.printStackTrace();
+			String errorMsg = "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Username or Email is already taken.";
+			request.setAttribute("errorMsg", errorMsg);
+			request.getRequestDispatcher("WEB-INF/view/signup.jsp").forward(request, response);
+			
+		}	
+		
+	}
+	
+	@RequestMapping({"/admin_register"})
+	public void registerWithType(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		String username = request.getParameter("username");
+		String email = request.getParameter("email");
+		String pw = request.getParameter("password");
+		String cpw = request.getParameter("confirmpassword");
+
+		String fName = request.getParameter("fname");
+		String mName = request.getParameter("mname");
+		String lName = request.getParameter("lname");
+
+		String billHouseNum = request.getParameter("billHouseNum");
+		String billStreet = request.getParameter("billStreet");
+		String billSubd = request.getParameter("billSubd");
+		String billCity = request.getParameter("billCity");
+		String billPostal = request.getParameter("billPostal");
+		String billCountry = request.getParameter("billCountry");
+		
+		String shipHouseNum = request.getParameter("shipHouseNum");
+		String shipStreet = request.getParameter("shipStreet");
+		String shipSubd = request.getParameter("shipSubd");
+		String shipCity = request.getParameter("shipCity");
+		String shipPostal = request.getParameter("shipPostal");
+		String shipCountry = request.getParameter("shipCountry");
+
+		Address billingAddress = new Address(billHouseNum, billStreet, billSubd, billCity, billPostal, billCountry);
+		Address shippingAddress = new Address(shipHouseNum, shipStreet, shipSubd, shipCity, shipPostal, shipCountry);
+		
+		String category = request.getParameter("userCategory");
+		
+		try {
+			uService.validate(email, username);
+			User u = new User(fName, mName, lName, username, email, pw, billingAddress, shippingAddress);
+			if("Product Manager".equals(category)){
+				u.setUserType(User.INACTIVE_PM);
+			} else if("Accounting Manager".equals(category)) {
+				u.setUserType(User.INACTIVE_AM);
+			}
 			uService.register(u);
 			response.sendRedirect("home");
 		} catch (UsernameOrEmailAlreadyTakenException e){

@@ -1,6 +1,8 @@
 package model;
 
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 
 import javax.annotation.PostConstruct;
@@ -9,6 +11,8 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +29,8 @@ public class User {
 	public static String PRODUCT_MANAGER = "PM";
 	public static String ACCOUNTING_MANAGER = "AM";
 	public static String ADMIN = "admin";
+	public static String INACTIVE_PM = "inactive_pm";
+	public static String INACTIVE_AM = "inactive_am";
 	
 	private String firstName;
 	private String middleName;
@@ -41,6 +47,8 @@ public class User {
 	@ElementCollection
 	private Collection<Integer> purchasedProducts;
 	private String userType;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dateCreated;
 
 	@Transient
 	private static PurchaseService oService;
@@ -63,6 +71,7 @@ public class User {
 		this.billingAddress = billingAddress;
 		this.shippingAddress = shippingAddress;
 		this.userType = User.REGULAR;
+		this.dateCreated = Calendar.getInstance().getTime();
 		
 		purchasedProducts = new HashSet<Integer>();
 	}
@@ -134,7 +143,9 @@ public class User {
 		return type.equals(REGULAR) ||
 				type.equals(PRODUCT_MANAGER) ||
 				type.equals(ACCOUNTING_MANAGER) ||
-				type.equals(ADMIN);
+				type.equals(ADMIN) ||
+				type.equals(INACTIVE_PM) ||
+				type.equals(INACTIVE_AM);
 	}
 
 	@Override
