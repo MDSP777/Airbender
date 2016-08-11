@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <jsp:include page="header.jsp"/>
     
@@ -8,14 +9,28 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h1 class="text-success">Sign Up</h1>
+          	<c:choose>
+	          	<c:when test="${isAdmin=='yes' }">
+            		<h1 class="text-success">Add User</h1>
+	            </c:when>
+	            <c:otherwise>
+            		<h1 class="text-success">Sign Up</h1>
+				</c:otherwise>
+            </c:choose>
             <h4>&nbsp;</h4>
-            <h4 class="text-muted">Enter your Username</h4>
+            <h4 class="text-muted">User Details</h4>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
-            <form class="form-horizontal" role="form" action="register" method="post" onsubmit="return checkform()">
+          	<c:choose>
+	          	<c:when test="${isAdmin=='yes' }">
+	            	<form class="form-horizontal" role="form" action="admin_register" method="post" onsubmit="return checkform()">
+	            </c:when>
+	            <c:otherwise>
+	            	<form class="form-horizontal" role="form" action="register" method="post" onsubmit="return checkform()">
+	            </c:otherwise>
+            </c:choose>
               <div class="form-group">
                 <div class="col-sm-2">
                   <label for="inputEmail3" class="control-label">Username</label>
@@ -54,7 +69,7 @@
               </div>
               </div>
               <h4>&nbsp;</h4>
-              <h4 class="text-muted">User Details</h4>
+              <h4 class="text-muted">Name</h4>
               <div class="form-group">
                 <div class="col-sm-2">
                   <label for="inputEmail3" class="control-label">First Name</label>
@@ -180,18 +195,19 @@
                 </div>
               </div>
               
-              <!-- Used when an admin adds a product or financial manager -->
-              <div class="form-group" style="display: none;">
-                <div class="col-sm-2">
-                  <label class="control-label">Role</label>
-                </div>
-                <div class="col-sm-10">
-                  <select class="form-control" name="userCategory">
-                    <option>Product Manager</option>
-                    <option>Accounting Manager</option>
-                  </select>
-                </div>
-              </div>
+              <c:if test="${isAdmin=='yes' }">
+	              <div class="form-group">
+	                <div class="col-sm-2">
+	                  <label class="control-label">Role</label>
+	                </div>
+	                <div class="col-sm-10">
+	                  <select class="form-control" name="userCategory">
+	                    <option>Product Manager</option>
+	                    <option>Accounting Manager</option>
+	                  </select>
+	                </div>
+	              </div>
+              </c:if>
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                   <button type="submit" class="btn btn-success" contenteditable="false" onclick="checkform();">Sign Up</button>

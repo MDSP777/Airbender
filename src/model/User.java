@@ -66,8 +66,7 @@ public class User {
 		this.lastName = lastName;
 		this.username = username;
 		this.email = email;
-		this.salt = BCrypt.gensalt(12);
-		this.password = BCrypt.hashpw(pw, salt);
+		this.setPassword(pw);
 		this.billingAddress = billingAddress;
 		this.shippingAddress = shippingAddress;
 		this.userType = User.REGULAR;
@@ -134,6 +133,11 @@ public class User {
 	public String getUserType() {
 		return userType;
 	}
+	
+	public void setPassword(String password){
+		this.salt = BCrypt.gensalt(12);
+		this.password = BCrypt.hashpw(password, salt);
+	}
 
 	public void setUserType(String userType) {
 		if(valid(userType)) this.userType = userType;
@@ -152,9 +156,9 @@ public class User {
 	public String toString() {
 		return "User [firstName=" + firstName + ", middleName=" + middleName
 				+ ", lastName=" + lastName + ", username=" + username
-				+ ", email=" + email + ", password=" + password + ", salt="
-				+ salt + ", billingAddress=" + billingAddress
-				+ ", shippingAddress=" + shippingAddress + "]";
+				+ ", email=" + email + ", billingAddress=" + billingAddress
+				+ ", shippingAddress=" + shippingAddress + ", userType="
+				+ userType + "]";
 	}
 
 	public boolean review(Product p, String content){
@@ -168,5 +172,10 @@ public class User {
 		{
 			return false;
 		}
+	}
+
+	public void activateUserType() {
+		if(userType.equals(INACTIVE_AM)) userType = ACCOUNTING_MANAGER;
+		else if(userType.equals(INACTIVE_PM)) userType = PRODUCT_MANAGER;
 	}
 }

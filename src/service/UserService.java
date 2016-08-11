@@ -1,6 +1,5 @@
 package service;
 
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import model.User;
@@ -18,7 +17,7 @@ public class UserService extends JpaService {
 			entityManager.persist(u);
 			System.out.println("Added User: "+u);
 		} finally {
-			//closeTransaction();
+			closeTransaction();
 		}
 	}
 	

@@ -47,6 +47,16 @@ public class UserController {
 	private PurchaseService oService;
 	private User user;
 	
+	@RequestMapping({"/activateAccount"})
+	public void activateAccount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		System.out.println("HI PUTA");
+		String newPass = request.getParameter("newPass");
+		user.setPassword(newPass);
+		user.activateUserType();
+		uService.update(user);
+		response.sendRedirect("");
+	}
+	
 	@RequestMapping({"/signup"})
 	public void signup(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		request.getRequestDispatcher("WEB-INF/view/signup.jsp").forward(request, response);
@@ -129,7 +139,8 @@ public class UserController {
 	
 	@RequestMapping({"/ad"})
 	public void admin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		request.getRequestDispatcher("WEB-INF/view/admin.jsp").forward(request, response);
+		request.setAttribute("isAdmin", "yes");
+		request.getRequestDispatcher("WEB-INF/view/signup.jsp").forward(request, response);
 	}
     
     @RequestMapping(value="/login", method = RequestMethod.POST)
@@ -196,7 +207,6 @@ public class UserController {
 		Address shippingAddress = new Address(shipHouseNum, shipStreet, shipSubd, shipCity, shipPostal, shipCountry);
 		
 		try {
-			uService.validate(email, username);
 			User u = new User(fName, mName, lName, username, email, pw, billingAddress, shippingAddress);
 			uService.register(u);
 			response.sendRedirect("home");
@@ -239,7 +249,7 @@ public class UserController {
 		Address shippingAddress = new Address(shipHouseNum, shipStreet, shipSubd, shipCity, shipPostal, shipCountry);
 		
 		String category = request.getParameter("userCategory");
-		
+		System.out.println("YES");
 		try {
 			uService.validate(email, username);
 			User u = new User(fName, mName, lName, username, email, pw, billingAddress, shippingAddress);

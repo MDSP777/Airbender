@@ -75,7 +75,7 @@
 				</li>
 			</c:if>
 			
-			<c:if test="${user.userType == 'temp'}">
+			<c:if test="${user.userType == 'inactive_pm' || user.userType == 'inactive_am'}">
 				<li>
 					<a data-toggle="modal" data-target="#changePass">Activate your Account</button>
 				</li>
@@ -91,6 +91,7 @@
     </div>
     
      <!-- Modal -->
+<form action="activateAccount" method="post">
   <div class="modal fade" id="changePass" role="dialog">
     <div class="modal-dialog">
     
@@ -100,22 +101,22 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Activate your Account</h4>
         </div>
-        <div class="modal-body">
-          <p>Change the default password to activate your account.</p>
-          <form action="changepass">
-          New Password: &nbsp;
-          <input name="newPass" type="text">
-        </div>
-        <div class="modal-footer">
-          
-          <button type="submit" class="btn btn-default" data-dismiss="modal">Change Password</button>
-          </form>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
+	        <div class="modal-body">
+	          <p>Change the default password to activate your account.</p>
+	          New Password: &nbsp;
+	          <input name="newPass" type="text">
+	        </div>
+	        <div class="modal-footer">
+	          
+	          <button type="submit" class="btn btn-default" data-dismiss="modal">Change Password</button>
+	       
+	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        </div>
       </div>
       
     </div>
   </div>
+</form>
     
     
 	<div id="login" >
