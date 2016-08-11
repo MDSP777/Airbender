@@ -11,19 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 import model.Address;
 import model.Purchase;
 import model.Product;
-import model.Review;
 import model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import exceptions.InvalidCategoryException;
 import exceptions.UsernameOrEmailAlreadyTakenException;
-import service.PurchaseService;
+
 import service.ProductService;
+import service.PurchaseService;
 import service.UserService;
 
 @Controller
@@ -39,22 +39,6 @@ public class UserController {
 	@RequestMapping({"/signup"})
 	public void signup(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		request.getRequestDispatcher("WEB-INF/view/signup.jsp").forward(request, response);
-	}
-	
-	@RequestMapping({"/login"})
-	public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		String username = request.getParameter("username");
-		String pw = request.getParameter("password");
-		
-		String hash = uService.getHashFor(username);
-		if(BCrypt.checkpw(pw, hash)){
-			User u = uService.findBy(username);
-			request.getSession().setAttribute("user", u);
-			user = u;
-			request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
-		} else {
-			response.sendRedirect("error");
-		}
 	}
 
 	@RequestMapping({"/pm"})
@@ -84,6 +68,28 @@ public class UserController {
 	public void admin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		request.getRequestDispatcher("WEB-INF/view/admin.jsp").forward(request, response);
 	}
+    
+    @RequestMapping(value="/login", method = RequestMethod.POST)
+	public void loginPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		String username = request.getParameter("username");
+		String pw = request.getParameter("password");
+		
+		String hash = uService.getHashFor(username);
+		if(BCrypt.checkpw(pw, hash)){
+			User u = uService.findBy(username);
+			request.getSession().setAttribute("user", u);
+			user = u;
+			response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+			request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
+		} else {
+			response.sendRedirect("home");
+		}
+	}
+	
+	@RequestMapping(value="/login", method=RequestMethod.GET)
+	public void loginGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		response.sendRedirect("home");
+	}
 	
 	@RequestMapping({"/logout"})
 	public void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
@@ -91,8 +97,11 @@ public class UserController {
 			System.out.println("Logging out "+user.getUsername());
 			user = null;
 			request.getSession().setAttribute("user", user);
+			request.getSession().invalidate();
 		}
-		response.sendRedirect("");
+        response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+		response.setHeader("Location", "https://localhost:8443/Airbender/");
+//		response.sendRedirect("");
 	}
 	
 	@RequestMapping({"/register"})
@@ -100,6 +109,7 @@ public class UserController {
 		String username = request.getParameter("username");
 		String email = request.getParameter("email");
 		String pw = request.getParameter("password");
+		String cpw = request.getParameter("confirmpassword");
 
 		String fName = request.getParameter("fname");
 		String mName = request.getParameter("mname");
@@ -126,7 +136,7 @@ public class UserController {
 			uService.validate(email, username);
 			User u = new User(fName, mName, lName, username, email, pw, billingAddress, shippingAddress);
 			uService.register(u);
-			response.sendRedirect("");
+			response.sendRedirect("home");
 		} catch (UsernameOrEmailAlreadyTakenException e){
 			e.printStackTrace();
 		}	

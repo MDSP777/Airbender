@@ -15,7 +15,7 @@
         </div>
         <div class="row">
           <div class="col-md-12">
-            <form class="form-horizontal" role="form" action="register" method="post">
+            <form class="form-horizontal" role="form" action="register" method="post" onsubmit="return checkform()">
               <div class="form-group">
                 <div class="col-sm-2">
                   <label for="inputEmail3" class="control-label">Username</label>
@@ -34,23 +34,24 @@
                   name="email">
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group" id="divrp">
                 <div class="col-sm-2">
                   <label for="inputPassword3" class="control-label">Password</label>
                 </div>
                 <div class="col-sm-10">
-                  <input type="password" class="form-control" id="inputPassword3" placeholder="Password"
+                  <input type="password" class="form-control" id="rpassword" placeholder="Password"
                   name="password">
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group" id="divrcp">
                 <div class="col-sm-2">
                   <label for="inputPassword3" class="control-label">Confirm Password</label>
                 </div>
                 <div class="col-sm-10">
-                  <input type="password" class="form-control" id="inputPassword3" placeholder="Password"
+                  <input type="password" class="form-control" id="rcpassword" placeholder="Password"
                   name="confirmpassword">
-                </div>
+                  <div id="divCheckPasswordMatch"></div>
+              </div>
               </div>
               <h4>&nbsp;</h4>
               <h4 class="text-muted">User Details</h4>
@@ -193,7 +194,7 @@
               </div>
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                  <button type="submit" class="btn btn-success" contenteditable="false">Sign Up</button>
+                  <button type="submit" class="btn btn-success" contenteditable="false" onclick="checkform();">Sign Up</button>
                 </div>
               </div>
             </form>

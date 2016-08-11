@@ -9,11 +9,11 @@
 	<link rel="stylesheet" href="<c:url value="/resources/css/style.css" />" />
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
     rel="stylesheet" type="text/css">
-    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="https://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
 	<script src="<c:url value="/resources/js/login.js" />" type="text/javascript"></script>
 </head>
 <body>
@@ -82,9 +82,9 @@
 	<div id="login" >
 		<div class="loginBox">
 		<form action="login" method="post">
-			<div class="form-text" >Username</div>
+			<div class="form-text" required>Username</div>
 			<input type="text" name="username"/>
-			<div class="form-text" >Password</div>
+			<div class="form-text" required>Password</div>
 			<input type="password" name="password"/>
 			<div class="loginButtons">
 				<div class = "row">

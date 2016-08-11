@@ -23,7 +23,7 @@ public class PageController {
 	@Autowired
 	private ProductService pService;
 	
-	@RequestMapping({"/patatas.htmlxxx", "/"})
+	@RequestMapping({"/patatas.htmlxxx", "/","/home"})
 	public void goToIndex(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
 	}
