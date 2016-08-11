@@ -188,7 +188,7 @@
                 <div class="col-sm-10">
                   <select class="form-control">
                     <option>Product Manager</option>
-                    <option>Financial Manager</option>
+                    <option>Accounting Manager</option>
                   </select>
                 </div>
               </div>
