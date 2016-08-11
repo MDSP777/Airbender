@@ -27,7 +27,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="patatas.htmlxxx" class="navbar-brand" style = "margin-top:10px;"><span style="font-size: 200%;">SECURDE</span></a>
+          <a href="" class="navbar-brand" style = "margin-top:10px;"><span style="font-size: 200%;">SECURDE</span></a>
         </div>
 <!--         <div id="icons" data-toggle="collapse" data-target="#navbar-ex-collapse"> -->
 <!--             <ul id="icons-nav"> -->
