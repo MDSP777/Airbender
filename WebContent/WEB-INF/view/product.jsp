@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <jsp:include page="header.jsp"/>
+	<script src="<c:url value="/resources/js/reviewError.js" />" type="text/javascript"></script>
 
    
     <div class="section">
@@ -30,7 +31,7 @@
             </ul>
             <form action="review" method="post">
               <input type="hidden" name="productId" value="${product.id }" />
-              <input name="review" placeholder=" Write a review ... " ><br>
+              <input name="review" placeholder=" Write a review ... " id="review"><br>
               <button type="submit" class="btn btn-success">Submit Review</button>
             </form>
             <div class="row">

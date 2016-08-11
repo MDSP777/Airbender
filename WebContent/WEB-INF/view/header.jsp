@@ -95,3 +95,12 @@
 		</form>
 		</div>
 	</div>
+	
+	
+	<c:if test="${not empty errorMsg}">
+		<div class="container" id="errorMsg">
+          	<div class="alert alert-warning fade in">
+				${errorMsg }	
+			</div>
+	  </div>
+	</c:if>

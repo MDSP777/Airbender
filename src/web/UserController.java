@@ -1,9 +1,17 @@
 package web;
 
+import java.io.BufferedReader;
+
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.script.Invocable;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +33,8 @@ import exceptions.UsernameOrEmailAlreadyTakenException;
 import service.ProductService;
 import service.PurchaseService;
 import service.UserService;
+
+import javax.servlet.ServletContext;
 
 @Controller
 public class UserController {
@@ -148,16 +158,49 @@ public class UserController {
 		Product p = pService.findBy(Integer.parseInt(request.getParameter("productId")));
 		int quantity = Integer.parseInt(request.getParameter("quantity"));
 		String creditCard = request.getParameter("creditcard");
-		user.order(p, quantity, creditCard);
-		uService.update(user);
-		response.sendRedirect("");
+		if(user == null)
+		{
+			String errorMsg = "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Login/Sign up first.";
+			request.setAttribute("errorMsg", errorMsg);
+			request.setAttribute("product", p);
+			request.getRequestDispatcher("WEB-INF/view/product.jsp").forward(request, response);
+		}
+		else
+		{
+			user.order(p, quantity, creditCard);
+			uService.update(user);
+			response.sendRedirect("home");
+		}
 	}
 
 	@RequestMapping({"/review"})
 	public void review(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		int id = Integer.parseInt(request.getParameter("productId"));
 		String content = request.getParameter("review");
-		user.review(pService.findBy(id), content);
-		response.sendRedirect("");
+
+		if(user == null)
+		{
+			String errorMsg = "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Login/Sign up first.";
+			request.setAttribute("errorMsg", errorMsg);	
+			Product p = pService.findBy(id);
+			request.setAttribute("product", p);
+			request.getRequestDispatcher("WEB-INF/view/product.jsp").forward(request, response);
+		}
+		else
+		{
+		
+			if(user.review(pService.findBy(id), content))
+			{
+				response.sendRedirect("home");
+			}
+			else
+			{
+				String errorMsg = "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Only users who have bought the product are allowed to make a review.";
+				request.setAttribute("errorMsg", errorMsg);
+				Product p = pService.findBy(id);
+				request.setAttribute("product", p);
+				request.getRequestDispatcher("WEB-INF/view/product.jsp").forward(request, response);
+			}
+		}
 	}
 }

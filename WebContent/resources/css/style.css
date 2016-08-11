@@ -183,3 +183,12 @@ div#signup h1
     width: 1140px;
   	margin-bottom:20px;
 }
+
+#errorMsg
+{
+	position: absolute;
+	top: 90px;
+	left: 0;
+	right: 0;
+	z-index: 100;
+}
