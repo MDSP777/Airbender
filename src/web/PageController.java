@@ -7,16 +7,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Product;
-import model.Purchase;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import service.ProductService;
 import exceptions.InvalidCategoryException;
+import model.Product;
+import service.ProductService;
 
 @Controller
 public class PageController {
@@ -54,11 +53,11 @@ public class PageController {
 			try {
 				Collection<Product> products = pService.findByType(type);
 				request.setAttribute("products", products);
+				request.getRequestDispatcher("WEB-INF/view/category.jsp").forward(request, response);
 			} catch(InvalidCategoryException e){
 				e.printStackTrace();
+				response.sendRedirect("");
 			}
-			request.getRequestDispatcher("WEB-INF/view/category.jsp").forward(request, response);
-			
 		}
 	}
 
@@ -68,10 +67,25 @@ public class PageController {
 	}
 
 	@RequestMapping({"/item"})
-	public void goToItem(@RequestParam int id, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		Product p = pService.findBy(id);
-		request.setAttribute("product", p);
-		request.getRequestDispatcher("WEB-INF/view/product.jsp").forward(request, response);
+	public void goToItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		int id = ServletRequestUtils.getIntParameter(request, "id", -1);
+		if(id == -1)
+		{
+			response.sendRedirect("");
+		}
+		else
+		{
+			Product p = pService.findBy(id);
+			if(p == null)
+			{
+				response.sendRedirect("");
+			}
+			else
+			{
+				request.setAttribute("product", p);
+				request.getRequestDispatcher("WEB-INF/view/product.jsp").forward(request, response);
+			}
+		}
 	}
 	
 }
