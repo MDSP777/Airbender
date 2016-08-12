@@ -1,7 +1,6 @@
 package web;
 
 import java.io.BufferedReader;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -28,9 +27,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import exceptions.ExpiredAccountException;
 import exceptions.InvalidCategoryException;
 import exceptions.UsernameOrEmailAlreadyTakenException;
-
 import service.ProductService;
 import service.PurchaseService;
 import service.UserService;
@@ -149,7 +148,15 @@ public class UserController {
 		
 		String hash = uService.getHashFor(username);
 		if(BCrypt.checkpw(pw, hash)){
-			User u = uService.findBy(username);
+			User u;
+			try {
+				u = uService.findBy(username);
+			} catch (ExpiredAccountException e) {
+				System.out.println("Error. Account expired.");
+				e.printStackTrace();
+				response.sendRedirect("");
+				return;
+			}
 			request.getSession().setAttribute("user", u);
 			user = u;
 			response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);

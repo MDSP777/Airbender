@@ -178,4 +178,15 @@ public class User {
 		if(userType.equals(INACTIVE_AM)) userType = ACCOUNTING_MANAGER;
 		else if(userType.equals(INACTIVE_PM)) userType = PRODUCT_MANAGER;
 	}
+
+	public Date getDateCreated() {
+		return dateCreated;
+	}
+
+	public boolean isActivated() {
+		return !(userType.equals(INACTIVE_AM) ||
+				userType.equals(INACTIVE_PM));
+	}
+	
+	
 }

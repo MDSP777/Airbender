@@ -6,6 +6,7 @@ import model.User;
 
 import org.springframework.stereotype.Repository;
 
+import exceptions.ExpiredAccountException;
 import exceptions.UsernameOrEmailAlreadyTakenException;
 
 @Repository
@@ -31,11 +32,14 @@ public class UserService extends JpaService {
 		}
 	}
 	
-	public User findBy(String username){
+	public User findBy(String username) throws ExpiredAccountException{
 		openTransaction();
 		try{
 			System.out.println("Retrieving "+username);
-			return entityManager.find(User.class, username);
+			User user = entityManager.find(User.class, username);
+			double diffInSecs = (System.currentTimeMillis()-user.getDateCreated().getTime())/1000;
+			if(!user.isActivated() && diffInSecs>86400) throw new ExpiredAccountException();
+			return user;
 		} finally {
 //			closeTransaction();
 		}
