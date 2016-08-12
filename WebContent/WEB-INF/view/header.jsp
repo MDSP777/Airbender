@@ -108,7 +108,7 @@
 	        </div>
 	        <div class="modal-footer">
 	          
-	          <button type="submit" class="btn btn-default" data-dismiss="modal">Change Password</button>
+	          <input type="submit" class="btn btn-default" value="Change Password"/>
 	       
 	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        </div>

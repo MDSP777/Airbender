@@ -48,8 +48,7 @@ public class UserController {
 	private User user;
 	
 	@RequestMapping({"/activateAccount"})
-	public void activateAccount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		System.out.println("HI PUTA");
+	public void activateAccount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String newPass = request.getParameter("newPass");
 		user.setPassword(newPass);
 		user.activateUserType();
