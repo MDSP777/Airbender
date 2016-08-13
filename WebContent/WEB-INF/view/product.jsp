@@ -29,11 +29,12 @@
 	              </li>
               </c:forEach>
             </ul>
-            <form action="review" method="post">
-              <input type="hidden" name="productId" value="${product.id }" />
-              <input name="review" placeholder=" Write a review ... " id="review"><br>
-              <button type="submit" class="btn btn-success">Submit Review</button>
-            </form>
+            <c:if test="${isLoggedIn=='yes' }">
+	            <form action="review" method="post">
+	              <input type="hidden" name="productId" value="${product.id }" />
+	              <input name="review" placeholder=" Write a review ... " id="review"><br>
+	              <button type="submit" class="btn btn-success">Submit Review</button>
+	            </form>
             <div class="row">
               <div class="col-md-6"></div>
               <div class="col-md-1">
@@ -89,6 +90,7 @@
 			  		</div>
 			  
 			    </form>
+			    </c:if>
             </div>
           </div>
         </div>

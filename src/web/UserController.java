@@ -1,16 +1,9 @@
 package web;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.script.Invocable;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +16,7 @@ import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,6 +26,7 @@ import exceptions.InvalidCategoryException;
 import exceptions.UsernameOrEmailAlreadyTakenException;
 import service.ProductService;
 import service.PurchaseService;
+import service.UserAttemptsService;
 import service.UserService;
 
 import javax.servlet.ServletContext;
@@ -44,6 +39,8 @@ public class UserController {
 	private ProductService pService;
 	@Autowired
 	private PurchaseService oService;
+	@Autowired
+	private UserAttemptsService uaService;
 	private User user;
 	
 	@RequestMapping({"/activateAccount"})
@@ -145,24 +142,49 @@ public class UserController {
 	public void loginPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		String username = request.getParameter("username");
 		String pw = request.getParameter("password");
-		
 		String hash = uService.getHashFor(username);
-		if(BCrypt.checkpw(pw, hash)){
-			User u;
-			try {
-				u = uService.findBy(username);
-			} catch (ExpiredAccountException e) {
-				System.out.println("Error. Account expired.");
-				e.printStackTrace();
-				response.sendRedirect("");
-				return;
+		if(hash==null){
+			response.sendRedirect("");
+			return;
+		}
+		if(!uaService.checkIfLocked(username)){
+			if(BCrypt.checkpw(pw, hash)){
+				User u;
+				try {
+					u = uService.findBy(username);
+				} catch (ExpiredAccountException e) {
+					System.out.println("Error. Account expired.");
+					e.printStackTrace();
+					response.sendRedirect("");
+					return;
+				}
+				request.getSession().setAttribute("user", u);
+				user = u;
+				response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+				request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
+			} else {
+				uaService.updateFailedAttempts(username);
+				response.sendRedirect("home");
 			}
-			request.getSession().setAttribute("user", u);
-			user = u;
+		} else {
+			if(BCrypt.checkpw(pw, hash)){
+				if(uaService.finishedWaitTime(username)){
+					User u;
+					try {
+						u = uService.findBy(username);
+					} catch (ExpiredAccountException e) {
+						System.out.println("Error. Account expired.");
+						e.printStackTrace();
+						response.sendRedirect("");
+						return;
+					}
+					request.getSession().setAttribute("user", u);
+					user = u;
+					uaService.resetFailedAttempts(username);
+				} 
+			}
 			response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 			request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
-		} else {
-			response.sendRedirect("home");
 		}
 	}
 	
@@ -182,6 +204,29 @@ public class UserController {
         response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 		response.setHeader("Location", "https://localhost:8443/SECURDE/");
 //		response.sendRedirect("");
+	}
+	
+	@RequestMapping({"/item"})
+	public void goToItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		int id = ServletRequestUtils.getIntParameter(request, "id", -1);
+		if(user!=null) request.setAttribute("isLoggedIn", "yes");
+		if(id == -1)
+		{
+			response.sendRedirect("");
+		}
+		else
+		{
+			Product p = pService.findBy(id);
+			if(p == null)
+			{
+				response.sendRedirect("");
+			}
+			else
+			{
+				request.setAttribute("product", p);
+				request.getRequestDispatcher("WEB-INF/view/product.jsp").forward(request, response);
+			}
+		}
 	}
 	
 	@RequestMapping({"/register"})

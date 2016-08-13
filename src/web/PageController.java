@@ -24,6 +24,7 @@ public class PageController {
 	
 	@RequestMapping({"/patatas.htmlxxx", "/","/home"})
 	public void goToIndex(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		System.out.println(request.getSession().getAttribute("user_name")+" "+request.getSession().getAttribute("user"));
 		request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
 	}
 	
@@ -64,28 +65,6 @@ public class PageController {
 	@RequestMapping({"/hello"})
 	public void goToHomepage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		request.getRequestDispatcher("WEB-INF/view/hello.jsp").forward(request, response);
-	}
-
-	@RequestMapping({"/item"})
-	public void goToItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		int id = ServletRequestUtils.getIntParameter(request, "id", -1);
-		if(id == -1)
-		{
-			response.sendRedirect("");
-		}
-		else
-		{
-			Product p = pService.findBy(id);
-			if(p == null)
-			{
-				response.sendRedirect("");
-			}
-			else
-			{
-				request.setAttribute("product", p);
-				request.getRequestDispatcher("WEB-INF/view/product.jsp").forward(request, response);
-			}
-		}
 	}
 	
 }

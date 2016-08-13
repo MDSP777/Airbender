@@ -3,6 +3,7 @@ package service;
 import javax.persistence.TypedQuery;
 
 import model.User;
+import model.UserAttempts;
 
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +17,7 @@ public class UserService extends JpaService {
 		try{
 			validate(u.getEmail(), u.getUsername());
 			entityManager.persist(u);
+			entityManager.persist(new UserAttempts(u.getUsername()));
 			System.out.println("Added User: "+u);
 		} finally {
 			closeTransaction();
@@ -51,6 +53,7 @@ public class UserService extends JpaService {
 			TypedQuery<String> q = entityManager.createQuery("SELECT password FROM User u "
 					+ "WHERE u.username=:username", String.class)
 					.setParameter("username", username);
+			if(q.getResultList().isEmpty()) return null;
 			return q.getResultList().get(0);
 		} finally {
 			closeTransaction();

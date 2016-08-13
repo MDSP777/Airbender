@@ -1,6 +1,7 @@
 package service;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.TypedQuery;
 
@@ -30,7 +31,9 @@ public class PurchaseService extends JpaService {
 		try{
 			TypedQuery<Double> query = 
 					entityManager.createQuery("SELECT sum(o.totalPrice) FROM Purchase o", Double.class);
-			return query.getResultList().get(0);
+			List<Double> list = query.getResultList();
+			if(!(list.get(0)==null)) return list.get(0);
+			else return 0;
 		} finally {
 			closeTransaction();
 		}

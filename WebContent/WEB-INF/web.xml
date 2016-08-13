@@ -52,7 +52,7 @@
 	</filter-mapping>
 	
 	<session-config>
-		<session-timeout>1</session-timeout>
+		<session-timeout>60</session-timeout>
   		<cookie-config>
   			<http-only>true</http-only>
   			<secure>true</secure>
