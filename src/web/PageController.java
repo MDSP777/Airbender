@@ -34,7 +34,8 @@ public class PageController {
 	}
 	
 	@RequestMapping({"/fail"})
-	public void fail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+	public void fail(@RequestParam String error, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		request.setAttribute("errorMessage", error);
 		request.getRequestDispatcher("WEB-INF/view/fail.jsp").forward(request, response);
 	}
 	
