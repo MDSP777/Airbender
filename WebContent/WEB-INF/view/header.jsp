@@ -27,8 +27,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <div style="height: 60px;">
-          	<a href="home" class="navbar-brand" style = "margin-top:-80px;"><img height="200px" alt="Talaria" src="<c:url value="/resources/images/logo/talaria-white.png" />"></a>
+          <div style="height: 30px;">
+          	<a href="home" class="navbar-brand" style = "margin-top:-80px; height: 150px;"><img height="200px" alt="Talaria" src="<c:url value="/resources/images/logo/talaria-white.png" />"></a>
           </div>
         </div>
 <!--         <div id="icons" data-toggle="collapse" data-target="#navbar-ex-collapse"> -->

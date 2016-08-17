@@ -200,6 +200,11 @@ div#signup h1
   width: 300px;
 }
 
+#categories
+{
+	z-index = 100;
+}
+
 #carousel1, #carousel2, #carousel3
 {
   height: 600px;

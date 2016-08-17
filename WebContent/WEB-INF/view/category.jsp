@@ -5,8 +5,8 @@
 <jsp:include page="header.jsp"/>
 
 
-    <div class="section">
-      <div class="container">
+    <div class="section" id = "categories">
+      <div class="container" style="margin-top: 30px;">
         <div class="row">
           <div class="col-md-12">
             <ul class="nav nav-pills">

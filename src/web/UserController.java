@@ -143,8 +143,12 @@ public class UserController {
 		String username = request.getParameter("username");
 		String pw = request.getParameter("password");
 		String hash = uService.getHashFor(username);
-		if(hash==null){
-			response.sendRedirect("");
+		if(hash==null)
+		{
+			String errorMsg = "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Wrong username and/or password.";
+			request.setAttribute("errorMsg", errorMsg);
+			request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
+			//response.sendRedirect("home");
 			return;
 		}
 		if(!uaService.checkIfLocked(username)){
@@ -155,7 +159,7 @@ public class UserController {
 				} catch (ExpiredAccountException e) {
 					System.out.println("Error. Account expired.");
 					e.printStackTrace();
-					response.sendRedirect("");
+					response.sendRedirect("home");
 					return;
 				}
 				request.getSession().setAttribute("user", u);
