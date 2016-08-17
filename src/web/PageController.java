@@ -33,6 +33,11 @@ public class PageController {
 		request.getRequestDispatcher("WEB-INF/view/error.jsp").forward(request, response);
 	}
 	
+	@RequestMapping({"/fail"})
+	public void fail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		request.getRequestDispatcher("WEB-INF/view/fail.jsp").forward(request, response);
+	}
+	
 	@RequestMapping({"/product"})
 	public void viewProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		request.getRequestDispatcher("WEB-INF/view/product.jsp").forward(request, response);
