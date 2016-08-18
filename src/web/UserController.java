@@ -159,7 +159,10 @@ public class UserController {
 				} catch (ExpiredAccountException e) {
 					System.out.println("Error. Account expired.");
 					e.printStackTrace();
-					response.sendRedirect("home");
+					String errorMsg = "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Error. Account expired.";
+					request.setAttribute("errorMsg", errorMsg);
+					request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
+					//response.sendRedirect("home");
 					return;
 				}
 				request.getSession().setAttribute("user", u);
@@ -168,7 +171,11 @@ public class UserController {
 				request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
 			} else {
 				uaService.updateFailedAttempts(username);
-				response.sendRedirect("home");
+				String errorMsg = "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Wrong username and/or password. 5 Consecutive failed attempts would lock out your Account";
+				request.setAttribute("errorMsg", errorMsg);
+				request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
+				//response.sendRedirect("home");
+				return;
 			}
 		} else {
 			if(BCrypt.checkpw(pw, hash)){
@@ -179,7 +186,10 @@ public class UserController {
 					} catch (ExpiredAccountException e) {
 						System.out.println("Error. Account expired.");
 						e.printStackTrace();
-						response.sendRedirect("");
+						String errorMsg = "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Error. Account expired.";
+						request.setAttribute("errorMsg", errorMsg);
+						request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
+						//response.sendRedirect("home");
 						return;
 					}
 					request.getSession().setAttribute("user", u);
@@ -187,6 +197,8 @@ public class UserController {
 					uaService.resetFailedAttempts(username);
 				} 
 			}
+			String errorMsg = "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Your Account has been locked out due to multiple failed attempts to login.";
+			request.setAttribute("errorMsg", errorMsg);
 			response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 			request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
 		}
@@ -369,6 +381,8 @@ public class UserController {
 			{
 				String errorMsg = "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Only users who have bought the product are allowed to make a review.";
 				request.setAttribute("errorMsg", errorMsg);
+				if(user!=null) request.setAttribute("isLoggedIn", "yes");
+				
 				Product p = pService.findBy(id);
 				request.setAttribute("product", p);
 				request.getRequestDispatcher("WEB-INF/view/product.jsp").forward(request, response);
