@@ -66,7 +66,7 @@
 			                  <label for="inputEmail3" class="control-label">Credit Card Number: &nbsp; </label>
 			                  <input type="hidden" name="price" value="${product.price }" id="price"/>
 			                  <input type="hidden" name="productId" value="${product.id }" id="productId"/>
-			                  <input type="text" class="text-input" name="creditcard" id="creditcard"/>
+			                  <input type="text" class="text-input" name="creditcard" id="creditcard" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
 					        </div>
 					        <div class="modal-footer">
 					          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
