@@ -32,30 +32,22 @@
           <div class="col-md-3">
             <a href="categories?type=boots"><img src="<c:url value="/resources/images/Boots.jpg" />" class="img-responsive" id="bootsimg"></a>
             <h2>Boots</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
-              <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-              <br>Ut enim ad minim veniam, quis nostrud</p>
+            <p>If it's for fashion or for the rainy season, we have here the boots to warm up your style or to warm up the heart of your cold love!</p>
           </div>	
           <div class="col-md-3">
             <a href="categories?type=shoes"><img src="<c:url value="/resources/images/Shoes.jpg" />" class="img-responsive" id="shoesimg"></a>
             <h2>Shoes</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
-              <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-              <br>Ut enim ad minim veniam, quis nostrud</p>
+            <p>Leather or rubber, Boat shoes or sneakers. Get 2 pairs of shoes for yourself or for the both of you!</p>
           </div>
           <div class="col-md-3">
             <a href="categories?type=sandals"><img src="<c:url value="/resources/images/Sandals.jpg" />" class="img-responsive" id="sandalsimg"></a>
             <h2>Sandals</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
-              <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-              <br>Ut enim ad minim veniam, quis nostrud</p>
+            <p>Kailangan mo ng masasandal-an? These sandals won't let down your feet. Be proud to be single! Be fashionable and chill at the same time!</p>
           </div>
           <div class="col-md-3">
             <a href="categories?type=slippers"><img src="<c:url value="/resources/images/Slippers.jpg" />" class="img-responsive" id="slippersimg"></a>
             <h2>Slippers</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
-              <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-              <br>Ut enim ad minim veniam, quis nostrud</p>
+            <p>Rubber flip-flops, comfy flip flops. These slippers will make you comfortable with its strong grip and protection.</p>
           </div>
         </div>
       </div>

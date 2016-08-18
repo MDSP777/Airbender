@@ -8,12 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Address;
-import model.Purchase;
-import model.Product;
-import model.User;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestUtils;
@@ -24,12 +20,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import exceptions.ExpiredAccountException;
 import exceptions.InvalidCategoryException;
 import exceptions.UsernameOrEmailAlreadyTakenException;
+import model.Address;
+import model.Product;
+import model.Purchase;
+import model.User;
 import service.ProductService;
 import service.PurchaseService;
 import service.UserAttemptsService;
 import service.UserService;
-
-import javax.servlet.ServletContext;
 
 @Controller
 public class UserController {
@@ -139,7 +137,7 @@ public class UserController {
 	}
     
     @RequestMapping(value="/login", method = RequestMethod.POST)
-	public void loginPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+	public void loginPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String pw = request.getParameter("password");
 		String hash = uService.getHashFor(username);
@@ -148,7 +146,6 @@ public class UserController {
 			String errorMsg = "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Wrong username and/or password.";
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
-			//response.sendRedirect("home");
 			return;
 		}
 		if(!uaService.checkIfLocked(username)){
@@ -159,7 +156,7 @@ public class UserController {
 				} catch (ExpiredAccountException e) {
 					System.out.println("Error. Account expired.");
 					e.printStackTrace();
-					response.sendRedirect("home");
+					response.sendRedirect("");
 					return;
 				}
 				request.getSession().setAttribute("user", u);
@@ -187,13 +184,12 @@ public class UserController {
 					uaService.resetFailedAttempts(username);
 				} 
 			}
-			response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-			request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
+			response.sendRedirect("home");
 		}
 	}
-	
+    
 	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public void loginGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+	public void loginGet(@RequestParam String username, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.sendRedirect("home");
 	}
 	
@@ -210,7 +206,7 @@ public class UserController {
 //		response.sendRedirect("");
 	}
 	
-	@RequestMapping({"/item"})
+    @RequestMapping({"/item"})
 	public void goToItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		int id = ServletRequestUtils.getIntParameter(request, "id", -1);
 		if(user!=null) request.setAttribute("isLoggedIn", "yes");
@@ -232,7 +228,7 @@ public class UserController {
 			}
 		}
 	}
-	
+    
 	@RequestMapping({"/register"})
 	public void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		String username = request.getParameter("username");

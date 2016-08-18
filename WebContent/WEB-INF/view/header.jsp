@@ -27,8 +27,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <div style="height: 30px;">
-          	<a href="home" class="navbar-brand" style = "margin-top:-80px; height: 150px;"><img height="200px" alt="Talaria" src="<c:url value="/resources/images/logo/talaria-white.png" />"></a>
+          <div style="height: 70px; padding-top: 2px; padding-bottom: 3px;">
+          	<a href="home" class="navbar-brand" style = "min-height:100%; margin: 0px; padding: 0px;"><img style = "max-height: 100%;" alt="Talaria" src="<c:url value="/resources/images/logo/talaria-white.png" />"></a>
           </div>
         </div>
 <!--         <div id="icons" data-toggle="collapse" data-target="#navbar-ex-collapse"> -->
@@ -71,6 +71,12 @@
 				</li>
 			</c:if>
 			
+			<c:if test="${user.userType == 'AM'}">
+				<li>
+					<a href="view_sales_reports?total" id="am-button">View Sales Reports</a>
+				</li>
+			</c:if>
+			
 			<c:if test="${user.userType == 'inactive_pm' || user.userType == 'inactive_am'}">
 				<li>
 					<a data-toggle="modal" data-target="#changePass">Activate your Account</button>
@@ -78,7 +84,10 @@
 			</c:if>
 			  	
 			  	<li>
-					<a href="logout" id="signup-button">Logout</a>
+			  		<form action="logout" method="post" id="logoutForm">
+			  			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+					<a href="javascript:$('#logoutForm').submit();" id="signup-button">Logout</a>
+					</form>
 			  	</li>
 			  </c:otherwise>
 			</c:choose>
@@ -113,21 +122,20 @@
     </div>
   </div>
 </form>
-    
-    
 	<div id="login" >
 		<div class="loginBox">
 		<form action="login" method="post">
 			<div class="form-text" required>Username</div>
-			<input type="text" name="username"/>
+			<input type="text" name="username" id="username"/>
 			<div class="form-text" required>Password</div>
-			<input type="password" name="password"/>
+			<input type="password" name="password" id="password"/>
 			<div class="loginButtons">
 				<div class = "row">
 					<button type="button" class="cancel">Cancel</button>
 					<button type="submit" class="submit-user">Login</button>
 				</div>
 			</div>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		</form>
 		</div>
 	</div>

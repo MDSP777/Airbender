@@ -31,6 +31,40 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
          <property name="entityManagerFactory" ref="entityManagerFactory" />  
  	</bean>
  	
+ 	<bean id="LoginSuccessHandler" class="security.LoginSuccessHandler" />
+ 	
+ 	<bean id="exceptionTranslationFilter" class="org.springframework.security.web.access.ExceptionTranslationFilter">
+  		<constructor-arg ref="authenticationEntryPoint"/>
+  	</bean>
+
+ 	<bean id="authenticationEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+	  <constructor-arg value="/home"/>
+	</bean>
+	
+	<bean id="authenticationFailureHandler" class="org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler">
+      <property name="exceptionMappings">
+        <props>
+          <prop key="org.springframework.security.authentication.AccountExpiredException">/home</prop>
+          <prop key="org.springframework.security.authentication.AccountStatusException">/home</prop>
+          <prop key="org.springframework.security.authentication.AuthenticationCredentialsNotFoundException">/home</prop>
+          <prop key="org.springframework.security.authentication.AuthenticationServiceException">/home</prop>
+          <prop key="org.springframework.security.authentication.BadCredentialsException">/home</prop>
+          <prop key="org.springframework.security.authentication.CredentialsExpiredException">/home</prop>
+          <prop key="org.springframework.security.authentication.DisabledException">/home</prop>
+          <prop key="org.springframework.security.authentication.InsufficientAuthenticationException">/home</prop>
+          <prop key="org.springframework.security.authentication.InternalAuthenticationServiceException">/home</prop>
+          <prop key="org.springframework.security.authentication.LockedException">/home</prop>
+          <prop key="org.springframework.security.authentication.ProviderNotFoundException">/home</prop>
+        </props>
+      </property>
+    </bean>
+    
+    <!--  <bean class="org.springframework.session.web.http.DefaultCookieSerializer">
+	    <property name="cookieName" value="test_sessionid"></property>
+	    <property name="cookiePath" value="/"></property>
+	    <property name="domainNamePattern" value="^.+?\.(\w+\.[a-z]+)$"></property>
+	    <property name=""></property>
+	</bean> -->
 <!--     <bean class="org.springframework.orm.jpa.JpaTransactionManager" -->
 <!--         id="transactionManager"> -->
 <!--         <property name="entityManagerFactory" ref="entityManagerFactory" /> -->

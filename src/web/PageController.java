@@ -22,21 +22,15 @@ public class PageController {
 	@Autowired
 	private ProductService pService;
 	
-	@RequestMapping({"/patatas.htmlxxx", "/","/home"})
+	@RequestMapping({"/","/home"})
 	public void goToIndex(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		System.out.println(request.getSession().getAttribute("user_name")+" "+request.getSession().getAttribute("user"));
+        System.out.println(request.getSession().getAttribute("user_name")+" "+request.getSession().getAttribute("user"));
 		request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
 	}
 	
 	@RequestMapping({"/error"})
 	public void error(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		request.getRequestDispatcher("WEB-INF/view/error.jsp").forward(request, response);
-	}
-	
-	@RequestMapping({"/fail"})
-	public void fail(@RequestParam String error, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		request.setAttribute("errorMessage", error);
-		request.getRequestDispatcher("WEB-INF/view/fail.jsp").forward(request, response);
 	}
 	
 	@RequestMapping({"/product"})
@@ -72,5 +66,4 @@ public class PageController {
 	public void goToHomepage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		request.getRequestDispatcher("WEB-INF/view/hello.jsp").forward(request, response);
 	}
-	
 }
