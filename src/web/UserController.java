@@ -143,7 +143,7 @@ public class UserController {
 		String hash = uService.getHashFor(username);
 		if(hash==null)
 		{
-			String errorMsg = "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Wrong username and/or password.";
+			String errorMsg = "<div class='alert alert-warning fade in'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Wrong username and/or password.";
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
 			return;
@@ -156,7 +156,9 @@ public class UserController {
 				} catch (ExpiredAccountException e) {
 					System.out.println("Error. Account expired.");
 					e.printStackTrace();
-					response.sendRedirect("");
+					String errorMsg = "<div class='alert alert-warning fade in'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Error. Account expired.";
+					request.setAttribute("errorMsg", errorMsg);
+					request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
 					return;
 				}
 				request.getSession().setAttribute("user", u);
@@ -165,7 +167,11 @@ public class UserController {
 				request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
 			} else {
 				uaService.updateFailedAttempts(username);
-				response.sendRedirect("home");
+				String errorMsg = "<div class='alert alert-warning fade in'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Wrong username and/or password. 5 Consecutive failed attempts would lock out your Account";
+				request.setAttribute("errorMsg", errorMsg);
+				request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
+				//response.sendRedirect("home");
+				return;
 			}
 		} else {
 			if(BCrypt.checkpw(pw, hash)){
@@ -176,7 +182,9 @@ public class UserController {
 					} catch (ExpiredAccountException e) {
 						System.out.println("Error. Account expired.");
 						e.printStackTrace();
-						response.sendRedirect("");
+						String errorMsg = "<div class='alert alert-warning fade in'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Error. Account expired.";
+						request.setAttribute("errorMsg", errorMsg);
+						request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
 						return;
 					}
 					request.getSession().setAttribute("user", u);
@@ -184,7 +192,10 @@ public class UserController {
 					uaService.resetFailedAttempts(username);
 				} 
 			}
-			response.sendRedirect("home");
+			String errorMsg = "<div class='alert alert-warning fade in'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Your Account has been locked out due to multiple failed attempts to login.";
+			request.setAttribute("errorMsg", errorMsg);
+			response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+			request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
 		}
 	}
     
@@ -263,7 +274,7 @@ public class UserController {
 			response.sendRedirect("home");
 		} catch (UsernameOrEmailAlreadyTakenException e){
 			//e.printStackTrace();
-			String errorMsg = "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Username or Email is already taken.";
+			String errorMsg = "<div class='alert alert-warning fade in'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Username or Email is already taken.";
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("WEB-INF/view/signup.jsp").forward(request, response);
 			
@@ -313,7 +324,7 @@ public class UserController {
 			response.sendRedirect("home");
 		} catch (UsernameOrEmailAlreadyTakenException e){
 			//e.printStackTrace();
-			String errorMsg = "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Username or Email is already taken.";
+			String errorMsg = "<div class='alert alert-warning fade in'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Username or Email is already taken.";
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("WEB-INF/view/signup.jsp").forward(request, response);
 			
@@ -328,7 +339,7 @@ public class UserController {
 		String creditCard = request.getParameter("creditcard");
 		if(user == null)
 		{
-			String errorMsg = "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Login/Sign up first.";
+			String errorMsg = "<div class='alert alert-warning fade in'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Login/Sign up first.";
 			request.setAttribute("errorMsg", errorMsg);
 			request.setAttribute("product", p);
 			request.getRequestDispatcher("WEB-INF/view/product.jsp").forward(request, response);
@@ -337,7 +348,11 @@ public class UserController {
 		{
 			user.order(p, quantity, creditCard);
 			uService.update(user);
-			response.sendRedirect("home");
+			String errorMsg = "<div class='alert alert-success fade in'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success!</strong> You have purchased " + quantity + " " + p.getName() + ".";
+			request.setAttribute("errorMsg", errorMsg);
+			request.setAttribute("product", p);
+			request.getRequestDispatcher("WEB-INF/view/product.jsp").forward(request, response);
+			//response.sendRedirect("home");
 		}
 	}
 
@@ -348,7 +363,7 @@ public class UserController {
 
 		if(user == null)
 		{
-			String errorMsg = "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Login/Sign up first.";
+			String errorMsg = "<div class='alert alert-warning fade in'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Login/Sign up first.";
 			request.setAttribute("errorMsg", errorMsg);	
 			Product p = pService.findBy(id);
 			request.setAttribute("product", p);
@@ -359,12 +374,16 @@ public class UserController {
 		
 			if(user.review(pService.findBy(id), content))
 			{
-				response.sendRedirect("home");
+				Product p = pService.findBy(id);
+				request.setAttribute("product", p);
+				request.getRequestDispatcher("WEB-INF/view/product.jsp").forward(request, response);
 			}
 			else
 			{
-				String errorMsg = "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Only users who have bought the product are allowed to make a review.";
+				String errorMsg = "<div class='alert alert-warning fade in'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Failed!</strong> Only users who have bought the product are allowed to make a review.";
 				request.setAttribute("errorMsg", errorMsg);
+				if(user!=null) request.setAttribute("isLoggedIn", "yes");
+				
 				Product p = pService.findBy(id);
 				request.setAttribute("product", p);
 				request.getRequestDispatcher("WEB-INF/view/product.jsp").forward(request, response);

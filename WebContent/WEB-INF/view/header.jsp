@@ -143,8 +143,9 @@
 	
 	<c:if test="${not empty errorMsg}">
 		<div class="container" id="errorMsgs">
-          	<div class="alert alert-warning fade in" style="margin-top:20px;">
-				${errorMsg }	
+          	<div style="margin-top:20px;">
+				${errorMsg }
+				</div>	
 			</div>
 	  </div>
 	</c:if>

@@ -42,7 +42,7 @@
               </div>
               <form action="purchase" method="post">
 	              <div class="col-md-1">
-	                  <input type="number" class="quantity-input" name="quantity" id="quantity" min="0" required/>
+	                  <input type="number" class="quantity-input" name="quantity" id="quantity" min="1" value="0" required/>
 	              </div>
 	              <div class="col-md-2 text-right">
 	                <h4 class="text-muted" contenteditable="false" id="total-price">Total: 0 php</h4>
